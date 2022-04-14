@@ -1,0 +1,49 @@
+
+YT Guide: https://www.youtube.com/watch?v=jYflkIo1R4A
+
+What you need from registration:
+redirectURI = http://127.0.0.1/classify-user.html
+URLENCODE(redirectURI) = http%3A%2F%2F127.0.0.1%2Fclassify-user.html
+clientId = 778qsouj52ro4k
+clientSecret = rK30gZFa4tLgq450
+
+----
+Authorization Endpoint (Browser):
+What you need:
+scope = r_basicprofile
+
+https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=778qsouj52ro4k&redirect_uri=http%3A%2F%2F127.0.0.1%2Fclassify-user.html&state=foobar&scope= r_basicprofile%20r_emailaddress
+
+auth code = 
+
+AQTGXSSQ795AVnODq8MJ-v21x1NU_Wp9CLYTYXcb6qa2GHpKGvU7-XeGOgKOB7R2J2H8KypJB4aXmSEjcFbye--XM17luULtsjsvF3iU6aZNL6k05Jm2dYj7vymmBtaRewEgdZtsavNdZjfiddiSI7mb9rVz9UtAJA9Lx3OK-FBmqhK2yZcrd9Rocjqj5QBkrv5q2D9fhpqOEBFwl5s
+
+---
+Token Endpoint:
+
+curl -ik -X POST https://www.linkedin.com/oauth/v2/accessToken \
+-d grant_type=authorization_code \
+-d code=AQTGXSSQ795AVnODq8MJ-v21x1NU_Wp9CLYTYXcb6qa2GHpKGvU7-XeGOgKOB7R2J2H8KypJB4aXmSEjcFbye--XM17luULtsjsvF3iU6aZNL6k05Jm2dYj7vymmBtaRewEgdZtsavNdZjfiddiSI7mb9rVz9UtAJA9Lx3OK-FBmqhK2yZcrd9Rocjqj5QBkrv5q2D9fhpqOEBFwl5s \
+-d redirect_uri=http%3A%2F%2F127.0.0.1%2Fclassify-user.html \
+-d client_id=778qsouj52ro4k \
+-d client_secret=rK30gZFa4tLgq450
+
+
+output:
+{"access_token":"AQW3VRbXb8ueruXpb_op2-B82mfSBW43t1lCfALpRZ8GZuek2mzqQWuwJxK_OvHIQhOC11ECx5Ucz7adZylQD5z8SQkZv6WsvueVlw5otoDvCXa_8ORn5pKeZzBPEqaQMO65CjIFzkHmAS44BUcZxCKj07wVyn9_WAoh2cQ3cZObAt2e4hbVP8ebKqlLdQA52n8aLqmDF-okQAogZZNtGm_uNp2ilWNX6zNv_DbN88yEN6n_7YHjH23X70olwkaJTs41PLcw9BisGHw4HEoXVp1abXnc7lQ7JCdGXQhU2YqaPhelYFwnZnUvOplytgCzVUfCskBqwy7IvrD1GrMjlBVDqJ1KxQ","expires_in":5183999}
+
+---
+Resource Access:
+
+curl https://api.linkedin.com/v2/me -H "Authorization: Bearer AQW3VRbXb8ueruXpb_op2-B82mfSBW43t1lCfALpRZ8GZuek2mzqQWuwJxK_OvHIQhOC11ECx5Ucz7adZylQD5z8SQkZv6WsvueVlw5otoDvCXa_8ORn5pKeZzBPEqaQMO65CjIFzkHmAS44BUcZxCKj07wVyn9_WAoh2cQ3cZObAt2e4hbVP8ebKqlLdQA52n8aLqmDF-okQAogZZNtGm_uNp2ilWNX6zNv_DbN88yEN6n_7YHjH23X70olwkaJTs41PLcw9BisGHw4HEoXVp1abXnc7lQ7JCdGXQhU2YqaPhelYFwnZnUvOplytgCzVUfCskBqwy7IvrD1GrMjlBVDqJ1KxQ"
+
+What you need from the response:
+firstname = 
+
+---------
+
+Documentation
+
+https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow
+We are on API v2
+Upgrade notice from v1 to v2: https://developer.linkedin.com/blog/posts/2018/redirecting-oauth-uas
