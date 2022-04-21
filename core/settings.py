@@ -122,6 +122,8 @@ STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
 )
 
+DEFAULT_PROFILE_PICTURE_LOCATION = os.path.join(STATICFILES_DIRS[0])
+
 
 #############################################################
 #############################################################
