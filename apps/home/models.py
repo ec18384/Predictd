@@ -29,7 +29,7 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
-class MBTITests(models.Model):
+class MBTITest(models.Model):
     initiator = models.ForeignKey(User, on_delete=models.CASCADE)
     target = models.TextField()
     input = models.TextField()

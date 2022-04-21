@@ -7,6 +7,8 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
+from ..home.models import MBTITest
+from django.views.generic.list import ListView
 
 
 def login_view(request):

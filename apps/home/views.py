@@ -8,7 +8,7 @@ from xmlrpc.client import Boolean
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
 from django.urls import reverse
 import time
@@ -18,6 +18,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from django.http import JsonResponse
+from django.core import serializers
+from .models import *
 
 
 @login_required(login_url="/login/")
@@ -86,7 +89,8 @@ def get_LinkedinSummary(request):
 
             # Click see more button, if it exists
             try:
-                driver.find_element_by_css_selector(".inline-show-more-text__link-container-collapsed:nth-child(3) > .inline-show-more-text__button").click()
+                driver.find_element_by_css_selector(
+                    ".inline-show-more-text__link-container-collapsed:nth-child(3) > .inline-show-more-text__button").click()
                 print("See more button was present and was clicked")
             except:
                 print("See more button not present and not clicked")
@@ -123,3 +127,22 @@ def get_LinkedinSummary(request):
         except:
             response = json.dumps({'Error': 'Something went wrong with get_LinkedinSummary'})
     return HttpResponse(response, content_type='application/json')
+
+
+def get_MBTITestsJsonList(request):
+    data = list(MBTITest.objects.values())
+    return JsonResponse({'data': data})
+
+
+def get_CurrentUsersMBTITestsJsonList(request):
+    data = MBTITest.objects.filter(initiator_id=request.user)
+    dataList = list(data.values())
+    return JsonResponse({'dataList': dataList})
+
+def mbti_detail_view(request):
+    allMBTITests = MBTITest.objects.all()
+    context = {
+        "allMBTITests": allMBTITests,
+    }
+
+    return render(request, 'home/history.html', context)
