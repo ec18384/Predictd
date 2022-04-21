@@ -6,11 +6,14 @@ import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+import os
 
 # Create your models here.
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from core import settings
 
 
 class Profile(models.Model):
@@ -28,6 +31,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+def get_image_path(instance, filename):
+    return os.path.join('photos', str(instance.id), filename)
+
 
 class MBTITest(models.Model):
     initiator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -35,3 +41,5 @@ class MBTITest(models.Model):
     input = models.TextField()
     date = models.DateTimeField()
     result = models.TextField(max_length=4)
+    profile_picture = models.ImageField(upload_to="profile_pictures/", blank=True,
+                                        default=settings.DEFAULT_PROFILE_PICTURE_LOCATION, max_length=100000)
