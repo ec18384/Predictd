@@ -7,18 +7,43 @@
 
 {% block content %}
 
-  <div class="container-fluid py-4">
+{#  Used for debugging  #}
+{#<table>#}
+{#<tr>#}
+{#    <th>id</th>#}
+{#    <th>target</th>#}
+{#    <th>input</th>#}
+{#    <th>result</th>#}
+{#    <th>initiator</th>#}
+{#    <th>initiator_id</th>#}
+{#    <th>date</th>#}
+{#</tr>#}
+{#{% for d in allMBTITests %}#}
+{#<tr>#}
+{#  <td>{{ d_id }}</td>#}
+{#  <td>{{ d.target }}</td>#}
+{#  <td>{{ d.input }}</td>#}
+{#  <td>{{ d.result }}</td>#}
+{#  <td>{{ d.initiator }}</td>#}
+{#  <td>{{ d.initiator_id }}</td>#}
+{#  <td>{{ d.date|date:"F d Y P" }}</td>#}
+{#</tr>#}
+{#{% endfor %}#}
+{#</table>#}
 
+
+  <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Recent Predictions by User - {{ user.get_username }}</h6>
+            <h6>Recent Predictions from All Users</h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
+                {% for test in allMBTITests %}
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Requester</th>
@@ -35,54 +60,80 @@
                           <img src="/static/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Tony Robbins</h6>
-                          <p class="text-xs text-secondary mb-0">Tony Robbins is CEO, Entrepreneur etc of XYZ.</p>
+                          <h6 class="mb-0 text-sm">{{ test.target }}</h6>
+                          <p class="text-xs text-secondary mb-0">{{ test.input }}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">Andrico</p>
+                      <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">ENTJ</span>
+                      <span class="badge badge-sm bg-gradient-success">{{ test.result }}</span>
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">19/04/2022</span>
+                      <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
                     </td>
                   </tr>
                 </tbody>
+                {% endfor %}
               </table>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Recent Predictions by All Users (Manager Only View)</h6>
+            <h6>Recent Predictions by User - {{ user.get_username }}</h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <table class="table align-items-center justify-content-center mb-0">
+              <table class="table align-items-center mb-0">
                 <thead>
+                {% for test in currentuserMBTITests %}
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
-                    <th></th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Requester</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Result</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                    <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div>
+                          <img src="/static/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{ test.target }}</h6>
+                          <p class="text-xs text-secondary mb-0">{{ test.input }}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">{{ test.result }}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
+                    </td>
+                  </tr>
                 </tbody>
+                {% endfor %}
               </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
 
 
 </table>
