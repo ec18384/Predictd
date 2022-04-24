@@ -11,7 +11,6 @@
 {#window.onload = function() {#}
 {#    document.getElementById('step2').hidden = true;#}
 {#    document.getElementById('resultOutput').hidden = true;#}
-{#};#}
 </script>
 
 <script xmlns="http://www.w3.org/1999/html">
@@ -23,20 +22,32 @@ function stepOneButtonPress() {
     jsonObject = JSON.parse(xmlHttp.response)
 
     {# Update step 2 preview summary #}
-    document.getElementById("summaryPreview").textContent = jsonObject.summaryText
+    document.getElementById("summaryPreview").textContent = jsonObject["summary"]
+    document.getElementById("target").textContent = jsonObject["target"]
 
     {# Update to show profile picture and set its size #}
     document.getElementById('step2').hidden = false;
     document.getElementById('resultOutput').hidden = false;
-    document.getElementById("profilePicture").src = jsonObject.profilePicUrl
-    document.getElementById("profilePicture").style.borderRadius = "50%"
+    document.getElementById("profilePicture").src = jsonObject.profilePicUrl;
+    document.getElementById("profilePicture").style.borderRadius = "50%";
 }
 
 </script>
 <script>
 function stepTwoButtonPress() {
-        alert(document.getElementById("summaryPreview").textContent)
+
+    {#Get relevant fields#}
+    input = encodeURIComponent(document.getElementById("summaryPreview").textContent);
+    target = encodeURIComponent(document.getElementById("target").textContent);
+
+    var xmlHttp = new XMLHttpRequest();
+    url = "/predict?target=" + target + "&input=" + input
+    xmlHttp.open("GET", url)
+    xmlHttp.send(null);
 }
+    jsonObject = JSON.parse(xmlHttp.response)
+
+    alert(jsonObject.string)
 </script>
 
     <div class="container-fluid py-4">
@@ -67,6 +78,7 @@ function stepTwoButtonPress() {
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
                       <img class="position-relative z-index-2 pt-0" src="/static/assets/img/LinkedIn-logo.jpeg" id="profilePicture" border-radius="150px" width="150px" padding-top="60%">
                     </div>
+                      <h5 id="target"></h5>
                   </div>
                 </div>
               </div>

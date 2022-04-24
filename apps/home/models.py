@@ -40,6 +40,7 @@ class MBTITest(models.Model):
     target = models.TextField()
     input = models.TextField()
     date = models.DateTimeField()
-    result = models.TextField(max_length=4)
+    type = models.TextField(max_length=4)
+    probability = models.DecimalField(decimal_places=16, max_digits=18, default=00.0000000000000000)
     profile_picture = models.ImageField(upload_to="profile_pictures/", blank=True,
                                         default=settings.DEFAULT_PROFILE_PICTURE_LOCATION, max_length=100000)
