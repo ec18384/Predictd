@@ -20,6 +20,7 @@ function stepOneButtonPress() {
     xmlHttp.send(null);
 
     jsonObject = JSON.parse(xmlHttp.response)
+    profilePicUrl = jsonObject["profilePicUrl"]
 
     {# Update step 2 preview summary #}
     document.getElementById("summaryPreview").textContent = jsonObject["summary"]
@@ -41,7 +42,7 @@ function stepTwoButtonPress() {
     target = encodeURIComponent(document.getElementById("target").textContent);
 
     var xmlHttp = new XMLHttpRequest();
-    url = "/predict?target=" + target + "&input=" + input
+    url = "/predict?target=" + target + "&input=" + input + "&profilePicUrl=" + profilePicUrl
     xmlHttp.open("GET", url)
     xmlHttp.send(null);
 }
