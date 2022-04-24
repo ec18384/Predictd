@@ -7,11 +7,11 @@
 
 {% block content %}
 
-<script>
+{#<script>#}
 {#window.onload = function() {#}
 {#    document.getElementById('step2').hidden = true;#}
 {#    document.getElementById('resultOutput').hidden = true;#}
-</script>
+{#</script>#}
 
 <script xmlns="http://www.w3.org/1999/html">
 function stepOneButtonPress() {
@@ -27,13 +27,11 @@ function stepOneButtonPress() {
     document.getElementById("target").textContent = jsonObject["target"]
 
     {# Update to show profile picture and set its size #}
-    document.getElementById('step2').hidden = false;
-    document.getElementById('resultOutput').hidden = false;
-    document.getElementById("profilePicture").src = jsonObject.profilePicUrl;
+    document.getElementById("profilePicture").src = profilePicUrl;
     document.getElementById("profilePicture").style.borderRadius = "50%";
 }
-
 </script>
+
 <script>
 function stepTwoButtonPress() {
 
@@ -43,25 +41,30 @@ function stepTwoButtonPress() {
 
     var xmlHttp = new XMLHttpRequest();
     url = "/predict?target=" + target + "&input=" + input + "&profilePicUrl=" + profilePicUrl
-    xmlHttp.open("GET", url)
+    xmlHttp.open("GET", url, false)
     xmlHttp.send(null);
-}
-    jsonObject = JSON.parse(xmlHttp.response)
 
-    alert(jsonObject.string)
+    console.log(xmlHttp.responseText)
+    alert(xmlHttp.responseText)
+    jsonObject = JSON.parse(xmlHttp.responseText)
+    target = jsonObject["target"]
+    type = jsonObject["type"]
+
+    document.getElementById("resultHeading").textContent = target + " is an " + type
+}
 </script>
 
     <div class="container-fluid py-4">
       
       <div class="row">
         <div class="row-cols-2">
-          <div class="card">
+          <div class="card" id="step1">
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="d-flex flex-column h-100">
-                    <h4 class="font-weight-bolder">Step 1</h4>
-                      <p class="mb-5">Enter the LinkedIn URL extension for the profile that you wish to process.<br><br>
+                    <h4 class="font-weight-bolder">Step 1 - Choose Target</h4>
+                      <p class="mb-5">Enter the LinkedIn URL extension for the target user profile that you wish to analyse.<br><br>
                           e.g. https://linkedin.com/in/<span class="font-weight-bold">ajrobbins</span>
                           <form a href="javascript:stepOneButtonPress();">
                               <input type="text" id="profileAlias" placeholder="ajrobbins">
@@ -79,7 +82,6 @@ function stepTwoButtonPress() {
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
                       <img class="position-relative z-index-2 pt-0" src="/static/assets/img/LinkedIn-logo.jpeg" id="profilePicture" border-radius="150px" width="150px" padding-top="60%">
                     </div>
-                      <h5 id="target"></h5>
                   </div>
                 </div>
               </div>
@@ -87,14 +89,17 @@ function stepTwoButtonPress() {
           </div>
         </div>
           <div class="row-cols-2">
-          <div class="card" id="step2">
-            <div class="overflow-hidden position-relative border-radius-xl bg-cover h-100" style="background-image: url('/static/assets/img/ivancik.jpg');">
+          <div class="card">
+            <div class="overflow-hidden position-relative border-radius-xl bg-cover h-100" style="background-image: url('');">
               <span class="mask bg-gradient-dark"></span>
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                <h5 class="text-white font-weight-bolder mb-4 pt-2">Step 2</h5>
-                    <textarea class="form-control" id="summaryPreview" rows="15" disabled="true">Please complete Step 1 first!</textarea>
-                <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:stepTwoButtonPress();">
-                  Continue
+                <h5 class="text-white font-weight-bolder mb-5 pt-2">Step 2 - LinkedIn Data Extraction</h5>
+                    <h5 class="text-white font-weight-bold">LinkedIn Summary for:</h5><h5 class="text-white font-weight-bold" id="target"></h5>
+                  <p></p>
+                    <textarea class="form-control" id="summaryPreview" rows="15" disabled="true">Please complete Step 1 to continue...</textarea>
+                <p></p>
+                  <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:stepTwoButtonPress();">
+                  Predict MBTI type!
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                 </a>
               </div>
@@ -115,7 +120,9 @@ function stepTwoButtonPress() {
               </div>
 
               <h6 class="h-100 ms-2 mt-4 mb-0"></h6>
-                <div style="text-align: center;"><h2>You are an <span class="font-weight-bold">{{ user.profile.mbti_type }}</span></h2></div>
+                <div style="text-align: center;">
+                    <h2  id="resultHeading">The result will be shown here.</h2>
+                </div>
                 <p></p>
                 <p></p>
                 <a href="javascript:alert('What does this mean indeed?');" div style="text-align: center;"><h5>What does this mean?</h5></a>
@@ -235,7 +242,7 @@ function stepTwoButtonPress() {
                 You are an <span class="font-weight-bold">{{ user.profile.mbti_type }}</span>
               </p>
             </div>
-            <div class="card-body p-3">
+            <div class="card-body p-3"  id="step2button">
               <div class="chart">
                 <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
               </div>

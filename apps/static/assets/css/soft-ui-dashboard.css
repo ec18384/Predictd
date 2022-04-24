@@ -5723,7 +5723,7 @@ textarea.form-control-lg {
   padding-bottom: 1rem !important; }
 
 .py-4 {
-  padding-top: 1.5rem !important;
+  padding-top: 6% !important;
   padding-bottom: 1.5rem !important; }
 
 .py-5 {
@@ -5962,7 +5962,7 @@ textarea.form-control-lg {
   background-color: #252f40 !important; }
 
 .bg-white {
-  background-color: #fff !important; }
+  background-color: #F2F3F6 !important; }
 
 .bg-body {
   background-color: #fff !important; }
@@ -9078,7 +9078,7 @@ label,
     transition: opacity 0.3 ease; }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%); }
+  background-image: linear-gradient(310deg, #426575 0%, #5998a5 100%); }
 
 .bg-gradient-secondary {
   background-image: linear-gradient(310deg, #627594 0%, #A8B8D8 100%); }
@@ -9096,10 +9096,10 @@ label,
   background-image: linear-gradient(310deg, #ea0606 0%, #ff667c 100%); }
 
 .bg-gradient-light {
-  background-image: linear-gradient(310deg, #CED4DA 0%, #EBEFF4 100%); }
+  background-image: linear-gradient(310deg, #426575 0%, #74d2de 100%); }
 
 .bg-gradient-dark {
-  background-image: linear-gradient(310deg, #141727 0%, #3A416F 100%); }
+  background-image: linear-gradient(310deg, #272b3c 0%, #426575 100%); }
 
 .bg-gradient-faded-primary {
   background-image: radial-gradient(370px circle at 80% 50%, rgba(203, 12, 159, 0.6) 0, #9b0979 100%); }
@@ -9693,7 +9693,7 @@ body {
   background-color: #fff; }
 
 h1, .h1, .h1, h2, .h2, .h2, h3, .h3, .h3, h4, .h4, .h4, h5, .h5, .h5, h6, .h6, .h6 {
-  color: #252f40; }
+  color: #272b3c; }
 
 h1, .h1, .h1 {
   font-size: 3rem;
@@ -12744,7 +12744,7 @@ p {
   background: #adb5bd; }
 
 .bg-gray-100 {
-  background-color: #f8f9fa !important; }
+  background-color: #f2f3f6 !important; }
 
 .bg-gray-200 {
   background-color: #e9ecef !important; }
