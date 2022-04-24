@@ -5,21 +5,21 @@ Copyright (c) 2019 - present AppSeed.us
 import profile
 from xmlrpc.client import Boolean
 
+import null as null
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
 from django.urls import reverse
-import time
+import requests
 import json
+import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from django.http import JsonResponse
-from django.core import serializers
 from .models import *
 
 
@@ -84,8 +84,11 @@ def get_LinkedinSummary(request):
             # Set profileAlias
             profileAlias = request.GET.get("profileAlias")
 
-            # Go to sign up page
+            # Go to users profile
             driver.get('https://www.linkedin.com/in/' + profileAlias)
+
+            # Extract full name
+            target = driver.find_element_by_xpath(xpath="//h1").text
 
             # Click see more button, if it exists
             try:
@@ -120,7 +123,7 @@ def get_LinkedinSummary(request):
             except:
                 print("Could not extract your own photo")
 
-            response = json.dumps({'summaryText': aboutText, 'profilePicUrl': profileUrl})
+            response = json.dumps({'summary': aboutText, 'profilePicUrl': profileUrl, 'target': target})
 
             # Finish test and quit driver
             driver.quit()
@@ -129,20 +132,41 @@ def get_LinkedinSummary(request):
     return HttpResponse(response, content_type='application/json')
 
 
-def get_MBTITestsJsonList(request):
-    data = list(MBTITest.objects.values())
-    return JsonResponse({'data': data})
-
-
-def get_CurrentUsersMBTITestsJsonList(request):
-    data = MBTITest.objects.filter(initiator_id=request.user)
-    dataList = list(data.values())
-    return JsonResponse({'dataList': dataList})
-
 def mbti_detail_view(request):
-    allMBTITests = MBTITest.objects.all()
+    allMBTITests = MBTITest.objects.all().order_by('-date')
     context = {
         "allMBTITests": allMBTITests,
     }
 
     return render(request, 'home/history.html', context)
+
+# Run external API prediction request
+def predict(request):
+
+    # Get input to run test on
+    input = str(request.GET.get("input"))
+    target = str(request.GET.get("target"))
+
+    # Get request from prediction classifier endpoint
+    requestUrl = "https://25rbpvhg52gkmpg7.anvil.app/_/private_api/7NQCNJNTZ7OKFGT7FTKDWVPT/prediction"
+    response = requests.get(requestUrl, params={"input": input, "target": target})
+
+    # Sample output
+    print(response.text)
+
+    # Convert to JSON
+    responseJson = response.json()
+
+    # Creat and store test object
+    test_obj = MBTITest(target=responseJson["target"],
+                        input=input,
+                        date=responseJson["date"],
+                        type=responseJson["type"],
+                        probability=responseJson["probability"],
+                        initiator_id=request.user.id)
+
+    if test_obj != null:
+        test_obj.save()
+        print("Success")
+
+    return HttpResponse(response, content_type='application/json')
