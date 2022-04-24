@@ -156,19 +156,28 @@ def predict(request):
     print(response.text)
 
     # Convert to JSON
-    responseJson = response.json()
+    responseDict = json.loads(response.text)
 
     # Creat and store test object
-    test_obj = MBTITest(target=responseJson["target"],
+    test_obj = MBTITest(target=responseDict["target"],
                         input=input,
-                        date=responseJson["date"],
-                        type=responseJson["type"],
-                        probability=responseJson["probability"],
-                        profile_picture_url=responseJson["profilePicUrl"],
+                        date=responseDict["date"],
+                        type=responseDict["type"],
+                        probability=responseDict["probability"],
+                        profile_picture_url=responseDict["profilePicUrl"],
                         initiator_id=request.user.id)
 
     if test_obj != null:
         test_obj.save()
-        print("Success")
+        print("Stored new test object")
 
-    return HttpResponse(response, content_type='application/json')
+    responseJson = json.dumps({"type": responseDict["type"],
+            "probability": responseDict["probability"],
+            "IP Address": responseDict["IP Address"],
+            "target": responseDict["target"],
+            "date": responseDict["date"],
+            "profilePicUrl": responseDict["profilePicUrl"]})
+
+    print(responseJson)
+
+    return HttpResponse(responseJson, content_type='application/json')
