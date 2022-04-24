@@ -146,10 +146,11 @@ def predict(request):
     # Get input to run test on
     input = str(request.GET.get("input"))
     target = str(request.GET.get("target"))
+    profilePicUrl = str(request.GET.get("profilePicUrl"))
 
     # Get request from prediction classifier endpoint
     requestUrl = "https://25rbpvhg52gkmpg7.anvil.app/_/private_api/7NQCNJNTZ7OKFGT7FTKDWVPT/prediction"
-    response = requests.get(requestUrl, params={"input": input, "target": target})
+    response = requests.get(requestUrl, params={"input": input, "target": target, "profilePicUrl": profilePicUrl})
 
     # Sample output
     print(response.text)
@@ -163,6 +164,7 @@ def predict(request):
                         date=responseJson["date"],
                         type=responseJson["type"],
                         probability=responseJson["probability"],
+                        profile_picture_url=responseJson["profilePicUrl"],
                         initiator_id=request.user.id)
 
     if test_obj != null:

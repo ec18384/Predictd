@@ -33,60 +33,65 @@
   <div class="container-fluid py-4">
 
       <div class="row">
-      <div class="col-12">
-        <div class="card mb-4">
-          <div class="card-header pb-0">
-            <h6>Recent Predictions by User - {{ user.get_username }}</h6>
-          </div>
-          <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                {% for test in allMBTITests %}
-                    {% if request.user.id == test.initiator_id %}
-                          <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Requester</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Result</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-                            <th class="text-secondary opacity-7"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-2 py-1">
-                                <div>
-                                  <img src="/static/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">{{ test.target }}</h6>
-                                  <p class="text-xs text-secondary mb-0">{{ test.input|truncatechars:140 }}</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                              <span class="badge badge-sm bg-gradient-success">{{ test.type }}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
-                            </td>
-                          </tr>
-                        </tbody>
-                    {% endif %}
-                {% endfor %}
-              </table>
+          <div class="row">
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <h6>Recent Predictions by User - {{ user.get_username }}</h6>
+              </div>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <tbody>
+                    {% for test in allMBTITests %}
+                        {% if request.user.id == test.initiator_id %}
+                   <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Initiator</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Result</th>
+                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Likelihood</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="/static/assets/img/profileHolder.png" class="avatar avatar-sm me-3">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{ test.target }}</h6>
+                              <p class="text-xs text-secondary mb-0">{{ test.input|truncatechars:120 }}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
+                        </td>
+                        <td class="align-middle text-center mb-0 text-sm">
+                          <span class="badge badge-sm bg-gradient-success">{{ test.type }}</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success">{{ test.probability }} %</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                        {% endif %}
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
       </div>
 
 
     <div class="row">
-      <div class="col-12">
+      <div class="row">
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6>Recent Predictions from All Users - Manager View Only</h6>
@@ -94,40 +99,44 @@
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
-                <thead>
-                {% for test in allMBTITests %}
-                  <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Requester</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Result</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-                    <th class="text-secondary opacity-7"></th>
-                  </tr>
-                </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="/static/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{ test.target }}</h6>
-                          <p class="text-xs text-secondary mb-0">{{ test.input|truncatechars:140 }}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">{{ test.type }}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
-                    </td>
-                  </tr>
-                </tbody>
+                {% for test in allMBTITests %}
+                   <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Request Target and Data</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Initiator</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Result</th>
+                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Likelihood</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="/static/assets/img/profileHolder.png" class="avatar avatar-sm me-3">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{ test.target }}</h6>
+                              <p class="text-xs text-secondary mb-0">{{ test.input|truncatechars:120 }}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0">{{ test.initiator }}</p>
+                        </td>
+                        <td class="align-middle text-center mb-0 text-sm">
+                          <span class="badge badge-sm bg-gradient-success">{{ test.type }}</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success">{{ test.probability }} %</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{ test.date|date:"F d Y P" }}</span>
+                        </td>
+                      </tr>
+                    </tbody>
                 {% endfor %}
               </table>
             </div>
