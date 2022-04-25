@@ -232,30 +232,26 @@ function stepTwoButtonPress() {
             </div>
           </div>
         </div>
-
-          <div class="card">
-            <div class="card-header pb-0">
-                <canvas id="chart-bars" class="chart-canvas"></canvas>
-              <h6>Breakdown of Types in the Population</h6>
-              <p class="text-sm">
-                <i class="fa fa-arrow-up text-success"></i>
-                You are an <span class="font-weight-bold">{{ user.profile.mbti_type }}</span>
-              </p>
-            </div>
-            <div class="card-body p-3"  id="step2button">
-              <div class="chart">
-                <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-          </div>
-
-      </div>
-
-      {% include "includes/footer.html" %}
-
     </div>
+
+<div class="row-cols-2">
+    <div class="card">
+            <div class="card-body p-3">
+                        <h6>Breakdown of Types in the Population</h6>
+                        <p class="text-sm">
+                        <i class="fa fa-arrow-up text-success"></i>
+                        You are an <span class="font-weight-bold">{{ user.profile.mbti_type }}</span>
+                        </p>
+                <div class="chart">
+                <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
+                </div>
+            </div>
+        </div>
+            <canvas id="chart-bars" class="chart-canvas"></canvas>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
 
 {% endblock content %}
 
@@ -265,8 +261,6 @@ function stepTwoButtonPress() {
   <script src="/static/assets/js/plugins/chartjs.min.js"></script>
   <script src="/static/assets/js/plugins/Chart.extension.js"></script>
   <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
     var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -281,6 +275,14 @@ function stepTwoButtonPress() {
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
 
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 
     new Chart(ctx2, {
       type: "bar",
@@ -317,7 +319,7 @@ function stepTwoButtonPress() {
               zeroLineColor: '#dee2e6',
               zeroLineWidth: 1,
               zeroLineBorderDash: [1],
-              drawBorder: false,
+              drawBorder: true,
             },
             ticks: {
               suggestedMin: 0,
