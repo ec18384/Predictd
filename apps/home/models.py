@@ -46,3 +46,19 @@ class MBTITest(models.Model):
     JvsP = models.TextField(max_length=1, default="")
     probability = models.DecimalField(decimal_places=2, max_digits=4, default=00.00)
     profile_picture_url = models.TextField(default="/static/assets/img/team-2.jpg")
+
+class mbtiModel(models.Model):
+
+    typeName = models.TextField(default="")
+    typeNickname = models.TextField(default="")
+    workStyleSummary = models.TextField(default="")
+    communication = models.TextField(default="")
+    meeting = models.TextField(default="")
+    emailing = models.TextField(default="")
+    feedback = models.TextField(default="")
+    conflict = models.TextField(default="")
+    conclusion = models.TextField(default="")
+    headerImgUrl = models.TextField(default="")
+    overview = models.TextField(default="")
+    strengths = models.TextField(default="")
+    weaknesses = models.TextField(default="")

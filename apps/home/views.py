@@ -190,3 +190,14 @@ def predict(request):
     print(responseJson)
 
     return HttpResponse(responseJson, content_type='application/json')
+
+def mbtiTypeResponse(request):
+    print(request.GET.get("type"))
+    type = request.GET.get("type")
+
+    mbtiTypeData = mbtiModel.objects.get(typeName=type)
+    context = {
+        "mbtiTypeData": mbtiTypeData,
+    }
+
+    return render(request, 'home/profile.html', context)

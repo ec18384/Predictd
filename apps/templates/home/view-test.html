@@ -7,115 +7,7 @@
 
 {% block content %}
 
-{#<script>#}
-{#window.onload = function() {#}
-{#    document.getElementById('step2').hidden = true;#}
-{#    document.getElementById('resultOutput').hidden = true;#}
-{#</script>#}
-
-<script xmlns="http://www.w3.org/1999/html">
-function stepOneButtonPress() {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "/getSummary?profileAlias=" + document.getElementById("profileAlias").value, false); // false for synchronous request
-    xmlHttp.send(null);
-
-    jsonObject = JSON.parse(xmlHttp.response)
-    profilePicUrl = jsonObject["profilePicUrl"]
-
-    {# Update step 2 preview summary #}
-    document.getElementById("summaryPreview").textContent = jsonObject["summary"]
-    document.getElementById("target").textContent = jsonObject["target"]
-
-    {# Update to show profile picture and set its size #}
-    document.getElementById("profilePicture").src = profilePicUrl;
-    document.getElementById("profilePicture").style.borderRadius = "50%";
-}
-</script>
-
-<script>
-function stepTwoButtonPress() {
-
-    {#Get relevant fields#}
-    input = encodeURIComponent(document.getElementById("summaryPreview").textContent);
-    target = encodeURIComponent(document.getElementById("target").textContent);
-
-    var xmlHttp = new XMLHttpRequest();
-    url = "/predict?target=" + target + "&input=" + input + "&profilePicUrl=" + profilePicUrl
-    xmlHttp.open("GET", url, false)
-    xmlHttp.send(null);
-
-    jsonObject = JSON.parse(xmlHttp.responseText)
-    target = jsonObject["target"]
-    type = jsonObject["type"]
-
-    document.getElementById("resultHeading").textContent = target
-    document.getElementById("resultType").textContent = type
-
-    {# Update fields #}
-    document.getElementById("IvsE").textContent = jsonObject["IvsE"]
-    document.getElementById("IvsS").textContent = jsonObject["IvsS"]
-    document.getElementById("TvsF").textContent = jsonObject["TvsF"]
-    document.getElementById("JvsP").textContent = jsonObject["JvsP"]
-    document.getElementById("probability").textContent = jsonObject["probability"] + " %"
-}
-</script>
-
-<script>
-    function save() {
-        alert(("saving"))
-    }
-</script>
-
-      <div class="row">
-        <div class="row-cols-2">
-          <div class="card" id="step1">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="d-flex flex-column h-100">
-                    <h4 class="font-weight-bolder">Step 1 - Choose Target</h4>
-                      <p class="mb-5">Enter the LinkedIn URL extension for the target user profile that you wish to analyse.<br><br>
-                          e.g. https://linkedin.com/in/<span class="font-weight-bold">ajrobbins</span>
-                          <form a href="javascript:stepOneButtonPress();">
-                              <input type="text" id="profileAlias" placeholder="ajrobbins">
-                          </form>
-                      </p>
-                    <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:stepOneButtonPress();">
-                      Continue
-                      <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                  <div class="border-radius-lg h-100">
-                    <img src="/static/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
-                    <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                      <img class="position-relative z-index-2 pt-0" src="/static/assets/img/LinkedIn-logo.jpeg" id="profilePicture" border-radius="150px" width="150px" padding-top="60%">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="row-cols-2">
-          <div class="card">
-            <div class="overflow-hidden position-relative border-radius-xl bg-cover h-100" style="background-image: url('');">
-              <span class="mask bg-gradient-dark"></span>
-              <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                <h5 class="text-white font-weight-bolder mb-5 pt-2">Step 2 - LinkedIn Data Extraction</h5>
-                    <h5 class="text-white font-weight-bold">LinkedIn Summary for:</h5><h5 class="text-white font-weight-bold" id="target"></h5>
-                  <p></p>
-                    <textarea class="form-control" id="summaryPreview" rows="15" disabled="true">Please complete Step 1 to continue...</textarea>
-                <p></p>
-                  <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:stepTwoButtonPress();">
-                  Predict MBTI type!
-                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="row">
     <div  id="resultOutput">
        <div class="row-cols-2">
           <div class="card">
@@ -131,9 +23,7 @@ function stepTwoButtonPress() {
 
               <h6 class="h-100 ms-2 mt-4 mb-0"></h6>
                 <div style="text-align: center;">
-                    <h2 style="color:#426575" id="resultHeading">Firstname LastName</h2>
-                    <h6 >is predicted to be an:</h6>
-                    <h2 style="color:#5998a5" id="resultType">Type</h2>
+                    <h2  id="resultHeading">The result will be shown here.</h2>
                 </div>
                 <p></p>
                 <p></p>
@@ -141,13 +31,19 @@ function stepTwoButtonPress() {
                 <center>
                     <p class="text-sm">
                             <i class="fa fa-arrow-up text-success"></i>
-                            The classifier performed at an accuracy of <span class="font-weight-bold" id="probability">00.00 %</span>
+                            The classifer performed at an accuracy of <span class="font-weight-bold" id="probability">00.00 %</span>
                     </p>
+                    <div class="container-fluid py-4">
+                        <a  href="javascript:save();">
+                            Share test output
+                            <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </center>
               <div class="container border-radius-lg">
                 <div class="row">
                   <div class="col-3 py-3 ps-0">
-                    <div class="d-flex-new mb-2">
+                    <div class="d-flex mb-2">
                       <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="10px" height="10px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>document</title>
@@ -166,12 +62,12 @@ function stepTwoButtonPress() {
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Introversion vs Extroversion</p>
                     </div>
                       <center><h4 class="font-weight-bolder" id="IvsE">IvsE</h4></center>
-                    <div class="progress w-100">
-
+                    <div class="progress w-75">
+                      <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
-                    <div class="d-flex-new mb-2">
+                    <div class="d-flex mb-2">
                       <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>spaceship</title>
@@ -192,12 +88,12 @@ function stepTwoButtonPress() {
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Intuition vs Sensing</p>
                     </div>
                       <center><h4 class="font-weight-bolder" id="IvsS">IvsS</h4></center>
-                    <div class="progress w-100">
-
+                    <div class="progress w-75">
+                      <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
-                    <div class="d-flex-new mb-2">
+                    <div class="d-flex mb-2">
                       <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>credit-card</title>
@@ -216,12 +112,12 @@ function stepTwoButtonPress() {
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Feeling vs Thinking</p>
                     </div>
                       <center><h4 class="font-weight-bolder" id="TvsF">TvsF</h4></center>
-                    <div class="progress w-100">
-
+                    <div class="progress w-75">
+                      <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-3 py-3 ps-0">
-                    <div class="d-flex-new mb-2">
+                    <div class="d-flex mb-2">
                       <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>settings</title>
@@ -241,8 +137,8 @@ function stepTwoButtonPress() {
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Judging vs Perceiving</p>
                     </div>
                       <center><h4 class="font-weight-bolder" id="JvsP">JvsP</h4></center>
-                    <div class="progress w-100">
-
+                    <div class="progress w-75">
+                      <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>

@@ -5037,6 +5037,11 @@ textarea.form-control-lg {
 .d-flex {
   display: flex !important; }
 
+.d-flex-new {
+  display: flex !important;
+  justify-content: center;
+}
+
 .d-inline-flex {
   display: inline-flex !important; }
 
