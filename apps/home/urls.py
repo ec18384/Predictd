@@ -17,6 +17,9 @@ urlpatterns = [
     # Show all past tests
     path('history.html', views.mbti_detail_view),
 
+    # Shows MBTI related data for a given field
+    path('profile.html', views.mbtiTypeResponse),
+
     # Run prediction
     path('predict', views.predict),
 
