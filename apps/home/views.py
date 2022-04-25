@@ -163,6 +163,10 @@ def predict(request):
                         input=input,
                         date=responseDict["date"],
                         type=responseDict["type"],
+                        IvsE=responseDict["IvsE"],
+                        IvsS=responseDict["IvsS"],
+                        TvsF=responseDict["TvsF"],
+                        JvsP=responseDict["JvsP"],
                         probability=responseDict["probability"],
                         profile_picture_url=responseDict["profilePicUrl"],
                         initiator_id=request.user.id)
@@ -171,7 +175,12 @@ def predict(request):
         test_obj.save()
         print("Stored new test object")
 
-    responseJson = json.dumps({"type": responseDict["type"],
+    responseJson = json.dumps({
+            "type": responseDict["type"],
+            "IvsE": responseDict["IvsE"],
+            "IvsS": responseDict["IvsS"],
+            "TvsF":  responseDict["TvsF"],
+            "JvsP": responseDict["JvsP"],
             "probability": responseDict["probability"],
             "IP Address": responseDict["IP Address"],
             "target": responseDict["target"],
