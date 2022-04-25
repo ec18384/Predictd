@@ -44,13 +44,20 @@ function stepTwoButtonPress() {
     xmlHttp.open("GET", url, false)
     xmlHttp.send(null);
 
-    console.log(xmlHttp.responseText)
-    alert(xmlHttp.responseText)
     jsonObject = JSON.parse(xmlHttp.responseText)
     target = jsonObject["target"]
     type = jsonObject["type"]
 
     document.getElementById("resultHeading").textContent = target + " is an " + type
+
+    {# Update fields #}
+    document.getElementById("IvsE").textContent = jsonObject["IvsE"]
+    document.getElementById("IvsS").textContent = jsonObject["IvsS"]
+    document.getElementById("TvsF").textContent = jsonObject["TvsF"]
+    document.getElementById("JvsP").textContent = jsonObject["JvsP"]
+    probabilty = jsonObject["probability"]
+    probabilty = probabilty.slice(0, 4)
+    document.getElementById("probability").textContent = probabilty + "%"
 }
 </script>
 
@@ -114,7 +121,7 @@ function stepTwoButtonPress() {
                 <div class="chart">
 
                 <div class="chart">
-                    <center><h1 style="color:whitesmoke;">{{ user.profile.mbti_nickname }}</h1></center>
+                    <center><h1 style="color:whitesmoke;"></h1></center>
                 </div>
                 </div>
               </div>
@@ -126,6 +133,12 @@ function stepTwoButtonPress() {
                 <p></p>
                 <p></p>
                 <a href="javascript:alert('What does this mean indeed?');" div style="text-align: center;"><h5>What does this mean?</h5></a>
+                <center>
+                    <p class="text-sm">
+                            <i class="fa fa-arrow-up text-success"></i>
+                            The classifer performed at an accuracy of <span class="font-weight-bold" id="probability">00.00 %</span>
+                    </p>
+                </center>
               <div class="container border-radius-lg">
                 <div class="row">
                   <div class="col-3 py-3 ps-0">
@@ -147,7 +160,7 @@ function stepTwoButtonPress() {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Introversion vs Extroversion</p>
                     </div>
-                    <h4 class="font-weight-bolder">23%</h4>
+                      <center><h4 class="font-weight-bolder" id="IvsE">IvsE</h4></center>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -173,7 +186,7 @@ function stepTwoButtonPress() {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Intuition vs Sensing</p>
                     </div>
-                    <h4 class="font-weight-bolder">80%</h4>
+                      <center><h4 class="font-weight-bolder" id="IvsS">IvsS</h4></center>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -197,7 +210,7 @@ function stepTwoButtonPress() {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Feeling vs Thinking</p>
                     </div>
-                    <h4 class="font-weight-bolder">55%</h4>
+                      <center><h4 class="font-weight-bolder" id="TvsF">TvsF</h4></center>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -222,7 +235,7 @@ function stepTwoButtonPress() {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Judging vs Perceiving</p>
                     </div>
-                    <h4 class="font-weight-bolder">43%</h4>
+                      <center><h4 class="font-weight-bolder" id="JvsP">JvsP</h4></center>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -240,7 +253,7 @@ function stepTwoButtonPress() {
                         <h6>Breakdown of Types in the Population</h6>
                         <p class="text-sm">
                         <i class="fa fa-arrow-up text-success"></i>
-                        You are an <span class="font-weight-bold">{{ user.profile.mbti_type }}</span>
+                        You are an <span class="font-weight-bold">untyped</span>
                         </p>
                 <div class="chart">
                 <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
@@ -321,6 +334,10 @@ function stepTwoButtonPress() {
               zeroLineBorderDash: [1],
               drawBorder: true,
             },
+            scaleLabel: {
+              display: true,
+              labelString: 'Percentage'
+             },
             ticks: {
               suggestedMin: 0,
               suggestedMax: 14,
@@ -331,7 +348,10 @@ function stepTwoButtonPress() {
               lineHeight: 1,
               fontStyle: 'normal',
               fontFamily: "Open Sans",
-            },
+               callback: function(value) {
+                    return value + " %";
+                   }
+               },
           }, ],
           xAxes: [{
             gridLines: {

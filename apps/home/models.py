@@ -19,7 +19,6 @@ from core import settings
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mbti_type = models.TextField(max_length=4, default="XXXX")
-    mbti_nickname = models.TextField()
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -41,5 +40,9 @@ class MBTITest(models.Model):
     input = models.TextField()
     date = models.DateTimeField()
     type = models.TextField(max_length=4)
+    IvsE = models.TextField(max_length=1, default="")
+    IvsS = models.TextField(max_length=1, default="")
+    TvsF = models.TextField(max_length=1, default="")
+    JvsP = models.TextField(max_length=1, default="")
     probability = models.DecimalField(decimal_places=2, max_digits=4, default=00.00)
     profile_picture_url = models.TextField(default="/static/assets/img/team-2.jpg")
