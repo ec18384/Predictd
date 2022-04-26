@@ -8,13 +8,17 @@ from xmlrpc.client import Boolean
 import null as null
 from django import template
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
+from django.template.loader import render_to_string
 from django.urls import reverse
 import requests
 import json
 import re
+
+from django.utils.html import format_html
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -140,9 +144,9 @@ def mbti_detail_view(request):
 
     return render(request, 'home/history.html', context)
 
+
 # Run external API prediction request
 def predict(request):
-
     # Get input to run test on
     input = str(request.GET.get("input"))
     target = str(request.GET.get("target"))
@@ -176,20 +180,21 @@ def predict(request):
         print("Stored new test object")
 
     responseJson = json.dumps({
-            "type": responseDict["type"],
-            "IvsE": responseDict["IvsE"],
-            "IvsS": responseDict["IvsS"],
-            "TvsF":  responseDict["TvsF"],
-            "JvsP": responseDict["JvsP"],
-            "probability": responseDict["probability"],
-            "IP Address": responseDict["IP Address"],
-            "target": responseDict["target"],
-            "date": responseDict["date"],
-            "profilePicUrl": responseDict["profilePicUrl"]})
+        "type": responseDict["type"],
+        "IvsE": responseDict["IvsE"],
+        "IvsS": responseDict["IvsS"],
+        "TvsF": responseDict["TvsF"],
+        "JvsP": responseDict["JvsP"],
+        "probability": responseDict["probability"],
+        "IP Address": responseDict["IP Address"],
+        "target": responseDict["target"],
+        "date": responseDict["date"],
+        "profilePicUrl": responseDict["profilePicUrl"]})
 
     print(responseJson)
 
     return HttpResponse(responseJson, content_type='application/json')
+
 
 def mbtiTypeResponse(request):
     print(request.GET.get("type"))
@@ -201,3 +206,17 @@ def mbtiTypeResponse(request):
     }
 
     return render(request, 'home/profile.html', context)
+
+
+def sendEmail(request):
+    # Send a welcome email on form submit
+    sender = request.GET.get("sender")
+    subject = "sociometrics email from: " + sender
+    target = request.GET.get("target")
+    plain_message = request.GET.get("message")
+    html_message = format_html(plain_message)
+    send_mail(subject, plain_message, settings.EMAIL_HOST_USER, [target], fail_silently=False, html_message=html_message)
+
+    print("Email successfully sent")
+
+    return HttpResponse(json.dumps({'Success': 'Your email was sent!'}), content_type='application/json')
