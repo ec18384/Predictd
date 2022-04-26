@@ -23,5 +23,8 @@ urlpatterns = [
     # Run prediction
     path('predict', views.predict),
 
+    # Send email
+    path('sendEmail', views.sendEmail),
+
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),]
