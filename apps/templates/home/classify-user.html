@@ -16,7 +16,7 @@
 <script xmlns="http://www.w3.org/1999/html">
 function stepOneButtonPress() {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "/getSummary?profileAlias=", false); // false for synchronous request
+    xmlHttp.open("GET", "/getSummary?profileAlias=" + document.getElementById("profileAlias").value, false); // false for synchronous request
     xmlHttp.send(null);
 
 
