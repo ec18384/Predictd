@@ -245,7 +245,7 @@ def getUsers(request):
 def sendEmail(request):
     # Send a welcome email on form submit
     sender = request.GET.get("sender")
-    subject = "sociometrics email from: " + sender
+    subject = "Predictd email from: " + sender
     target = request.GET.get("target")
     plain_message = request.GET.get("message")
     html_message = format_html(plain_message)

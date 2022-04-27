@@ -30,7 +30,7 @@ class MBTITest(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.TextField(default="Employee")
+    role = models.TextField(default="Developer")
     testResult = models.ForeignKey(MBTITest, on_delete=models.CASCADE, null=True)
 
 @receiver(post_save, sender=User)
