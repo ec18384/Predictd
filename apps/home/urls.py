@@ -20,8 +20,14 @@ urlpatterns = [
     # Shows MBTI related data for a given field
     path('profile.html', views.mbtiTypeResponse),
 
+    # Shows data relevant to redirect profile
+    path('profileRedirect.html', views.profileRedirect),
+
     # Run prediction
     path('predict', views.predict),
+
+    # All Seeing Eye Data
+    path('all-seeing-eye.html', views.getUsers),
 
     # Send email
     path('sendEmail', views.sendEmail),

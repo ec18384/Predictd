@@ -16,8 +16,9 @@
 <script xmlns="http://www.w3.org/1999/html">
 function stepOneButtonPress() {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "/getSummary?profileAlias=" + document.getElementById("profileAlias").value, false); // false for synchronous request
+    xmlHttp.open("GET", "/getSummary?profileAlias=", false); // false for synchronous request
     xmlHttp.send(null);
+
 
     jsonObject = JSON.parse(xmlHttp.response)
     profilePicUrl = jsonObject["profilePicUrl"]
@@ -35,12 +36,16 @@ function stepOneButtonPress() {
 <script>
 function stepTwoButtonPress() {
 
+    {# Read checkbox value #}
+
     {#Get relevant fields#}
     input = encodeURIComponent(document.getElementById("summaryPreview").textContent);
     target = encodeURIComponent(document.getElementById("target").textContent);
+    ownProfile = document.getElementById("ownProfileToggle").checked;
+    ownProfile = ownProfile.toString()
 
     var xmlHttp = new XMLHttpRequest();
-    url = "/predict?target=" + target + "&input=" + input + "&profilePicUrl=" + profilePicUrl
+    url = "/predict?target=" + target + "&input=" + input + "&profilePicUrl=" + profilePicUrl + "&ownProfile=" + ownProfile
     xmlHttp.open("GET", url, false)
     xmlHttp.send(null);
 
@@ -66,6 +71,12 @@ function stepTwoButtonPress() {
     }
 </script>
 
+<script>
+    function loadProfile() {
+        window.location.href = "profile.html&type=" + document.getElementById("resultType").textContent
+    }
+</script>
+
       <div class="row" style="padding-top: 60px;">
         <div class="row-cols-2">
           <div class="card" id="step1">
@@ -74,8 +85,13 @@ function stepTwoButtonPress() {
                 <div class="col-lg-6">
                   <div class="d-flex flex-column h-100">
                     <h4 class="font-weight-bolder">Step 1 - Choose Target</h4>
-                      <p class="mb-5">Enter the LinkedIn URL extension for the target user profile that you wish to analyse.<br><br>
-                          e.g. https://linkedin.com/in/<span class="font-weight-bold">ajrobbins</span>
+                      <p class="mb-5">Enter the LinkedIn URL extension for the target user profile that you wish to analyse. If you wish to save your own result, use the checkbox below.
+                          <br>
+                          <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="ownProfileToggle" checked="">
+                          <label class="custom-control-label" for="customCheck1">This is my own profile</label>
+                        </div>
+                          <br>
                           <form a href="javascript:stepOneButtonPress();">
                               <input type="text" id="profileAlias" placeholder="ajrobbins">
                           </form>
@@ -137,7 +153,7 @@ function stepTwoButtonPress() {
                 </div>
                 <p></p>
                 <p></p>
-                <a href="javascript:alert('What does this mean indeed?');" div style="text-align: center;"><h5>What does this mean?</h5></a>
+                <a href="javascript:loadProfile();" div style="text-align: center;"><h5>What does this mean?</h5></a>
                 <center>
                     <p class="text-sm">
                             <i class="fa fa-arrow-up text-success"></i>
