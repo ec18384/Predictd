@@ -15,10 +15,23 @@ from django.dispatch import receiver
 
 from core import settings
 
+class MBTITest(models.Model):
+    initiator = models.ForeignKey(User, on_delete=models.CASCADE)
+    target = models.TextField()
+    input = models.TextField()
+    date = models.DateTimeField()
+    type = models.TextField(max_length=4)
+    IvsE = models.TextField(max_length=1, default="")
+    IvsS = models.TextField(max_length=1, default="")
+    TvsF = models.TextField(max_length=1, default="")
+    JvsP = models.TextField(max_length=1, default="")
+    probability = models.DecimalField(decimal_places=2, max_digits=4, default=00.00)
+    profile_picture_url = models.TextField(default="/static/assets/img/team-2.jpg")
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mbti_type = models.TextField(max_length=4, default="XXXX")
+    role = models.TextField(default="Employee")
+    testResult = models.ForeignKey(MBTITest, on_delete=models.CASCADE, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -34,21 +47,7 @@ def get_image_path(instance, filename):
     return os.path.join('photos', str(instance.id), filename)
 
 
-class MBTITest(models.Model):
-    initiator = models.ForeignKey(User, on_delete=models.CASCADE)
-    target = models.TextField()
-    input = models.TextField()
-    date = models.DateTimeField()
-    type = models.TextField(max_length=4)
-    IvsE = models.TextField(max_length=1, default="")
-    IvsS = models.TextField(max_length=1, default="")
-    TvsF = models.TextField(max_length=1, default="")
-    JvsP = models.TextField(max_length=1, default="")
-    probability = models.DecimalField(decimal_places=2, max_digits=4, default=00.00)
-    profile_picture_url = models.TextField(default="/static/assets/img/team-2.jpg")
-
 class mbtiModel(models.Model):
-
     typeName = models.TextField(default="")
     typeNickname = models.TextField(default="")
     workStyleSummary = models.TextField(default="")

@@ -151,6 +151,7 @@ def predict(request):
     input = str(request.GET.get("input"))
     target = str(request.GET.get("target"))
     profilePicUrl = str(request.GET.get("profilePicUrl"))
+    ownProfile = str(request.GET.get("ownProfile"))
 
     # Get request from prediction classifier endpoint
     requestUrl = "https://25rbpvhg52gkmpg7.anvil.app/_/private_api/7NQCNJNTZ7OKFGT7FTKDWVPT/prediction"
@@ -179,6 +180,13 @@ def predict(request):
         test_obj.save()
         print("Stored new test object")
 
+    # Check if user said this was their own profile, then we update their profile accordingly with the test result
+    if ownProfile == "true":
+        print("Updating users own profile")
+        user = User.objects.get(pk=request.user.id)
+        user.profile.testResult_id = test_obj.id
+        user.save()
+
     responseJson = json.dumps({
         "type": responseDict["type"],
         "IvsE": responseDict["IvsE"],
@@ -206,6 +214,32 @@ def mbtiTypeResponse(request):
     }
 
     return render(request, 'home/profile.html', context)
+
+def profileRedirect(request):
+    userId = request.user.id
+    userData = User.objects.get(pk=userId)
+
+    testId = userData.profile.testResult_id
+
+    if testId:
+        test = MBTITest.objects.get(pk=testId)
+
+        context = {
+            "test": test,
+        }
+
+        return render(request, 'home/profileRedirect.html', context)
+    else:
+        return HttpResponseRedirect('classify-user.html')
+
+
+def getUsers(request):
+    users = User.objects.all().order_by('-last_login')
+    context = {
+        "users": users,
+    }
+
+    return render(request, 'home/all-seeing-eye.html', context)
 
 
 def sendEmail(request):
