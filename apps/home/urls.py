@@ -32,6 +32,9 @@ urlpatterns = [
     # Send email
     path('sendEmail', views.sendEmail),
 
+    # Add a new user
+    path('new_user/', views.new_user, name='new_user'),
+
     # Update user
     path('update_user/', views.update_user, name='update_user'),
 

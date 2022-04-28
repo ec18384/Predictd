@@ -7,6 +7,7 @@ from xmlrpc.client import Boolean
 
 import null as null
 from django import template
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, QueryDict, JsonResponse
@@ -267,11 +268,43 @@ def update_user(request):
     user.username = request.get('formName')
     user.email = request.get('formEmail')
     profile.role = request.get('formRole')
+    profile.team = request.get('formTeam')
 
     user.save()
 
     return JsonResponse({
         'name': user.username,
         'email': user.email,
-        'role': profile.role
+        'role': profile.role,
+        'team': profile.team,
+    })
+
+# POST Request to create a new user
+def new_user(request):
+    request = request
+    name = request.POST.get('NewUsername')
+    email = request.POST.get('NewEmail')
+    role = request.POST.get('NewRole')
+    team = request.POST.get('NewTeam')
+    password = request.POST.get('NewPassword')
+
+    user = User.objects.create_user(username=name, email=email, password=password)
+
+    user.save()
+
+    user = User.objects.get(username=name)
+
+    profile = user.profile
+
+    profile.role = role
+    profile.team = team
+
+    profile.save()
+
+    return JsonResponse({
+        'id': user.id,
+        'name': user.username,
+        'email': user.email,
+        'role': user.profile.role,
+        'team': user.profile.team,
     })

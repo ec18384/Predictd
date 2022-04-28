@@ -12,7 +12,7 @@
 function sendEmail() {
     var xmlHttp = new XMLHttpRequest();
     url = "/sendEmail?sender=" + "{{ request.user.username }}" + "&target=" + document.getElementById("email-recipient").value + "&message=" + document.getElementById("email-message").innerHTML.replace(/\n\r?/g, '<br />');
-    xmlHttp.open("GET", url, false)
+    xmlHttp.open("GET", url, true)
     xmlHttp.send(null);
 
     jsonObject = JSON.parse(xmlHttp.response)
@@ -44,7 +44,7 @@ function sendEmail() {
             </div>
             <div class="form-group">
                 <label class="form-control-label">Message</label>
-                <textarea class="form-control" type="text" id="email-message" rows="10">I just found out that I am an {{ mbtiTypeData.typeName }}, also known as {{ mbtiTypeData.typeNickname }}!&#13;&#10;&#13;&#10;Here are some tips for communicating with me:&#13;&#10;{{ mbtiTypeData.communication }}&#13;&#10;&#13;&#10;Find out more at sociemetrics on the following link: http://127.0.0.1:8000/profile.html?type={{ mbtiTypeData.typeName }}</textarea>
+                <textarea class="form-control" type="text" id="email-message" rows="13">I just found out that I am an {{ mbtiTypeData.typeName }}, also known as {{ mbtiTypeData.typeNickname }}!&#13;&#10;&#13;&#10;Here are some tips for communicating with me:&#13;&#10;{{ mbtiTypeData.communication }}&#13;&#10;&#13;&#10;Find out more at Predictd on the following link: http://127.0.0.1:8000/profile.html?type={{ mbtiTypeData.typeName }}</textarea>
             </div>
         </form>
       </div>
@@ -52,7 +52,6 @@ function sendEmail() {
         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn bg-gradient-primary" onclick="sendEmail()">Send</button>
       </div>
-
     </div>
   </div>
 </div>

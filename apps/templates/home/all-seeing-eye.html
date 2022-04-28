@@ -121,25 +121,9 @@ function teamsClicked(){
                     <span class="ms-1">Teams</span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="javascript:;" role="tab" aria-controls="dashboard" aria-selected="false">
-                    <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <title>settings</title>
-                      <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Rounded-Icons" transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                          <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
-                            <g id="settings" transform="translate(304.000000, 151.000000)">
-                              <polygon class="color-background" id="Path" opacity="0.596981957" points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667"></polygon>
-                              <path class="color-background" d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z" id="Path" opacity="0.596981957"></path>
-                              <path class="color-background" d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z" id="Path"></path>
-                            </g>
-                          </g>
-                        </g>
-                      </g>
-                    </svg>
                     <span class="ms-1">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
+                        <button type="button" class="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#newUserModal">
                           New User
                         </button>
                     </span>
@@ -159,6 +143,7 @@ function teamsClicked(){
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username and Email</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Job Role</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Team</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last Logged In</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Joined</th>
                   <th class="text-secondary opacity-7"></th>
@@ -181,6 +166,9 @@ function teamsClicked(){
                   <td>
                     <p class="roleField text-xs font-weight-bold mb-0">{{ user.profile.role }}</p>
                   </td>
+                  <td>
+                    <p class="teamField text-xs font-weight-bold mb-0">{{ user.profile.team }}</p>
+                  </td>
                   <td class="align-middle text-center text-sm" >
                     <span class="text-secondary text-xs font-weight-bold">{{ user.last_login }}</span>
                   </td>
@@ -198,7 +186,7 @@ function teamsClicked(){
         </div>
     </div>
 
-  <!-- Modal -->
+  <!-- Edit User Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
       <div class="modal-content">
@@ -223,6 +211,10 @@ function teamsClicked(){
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="form-role"name="formRole">
             </div>
+            <label>Team</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="form-team"name="formTeam">
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
@@ -233,24 +225,100 @@ function teamsClicked(){
     </div>
   </div>
 
+      <!-- New User Modal -->
+  <div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="card card-plain">
+              <div class="card-header pb-0 text-left">
+                  <h3 class="font-weight-bolder text-primary text-gradient">New user</h3>
+                  <p class="mb-0">As a superuser, you can the form below to add a new user to the system</p>
+              </div>
+              <div class="card-body pb-3">
+                <form role="form text-left" id="addUser">
+                  <label>Username</label>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="NewUsername" placeholder="Name" aria-label="Name" aria-describedby="name-addon">
+                  </div>
+                  <label>Email</label>
+                  <div class="input-group mb-3">
+                    <input type="email" class="form-control" name="NewEmail" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                  </div>
+                  <label>Job Role</label>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="NewRole" placeholder="Name" aria-label="Name" aria-describedby="name-addon">
+                  </div>
+                  <label>Team</label>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="NewTeam" placeholder="Name" aria-label="Name" aria-describedby="name-addon">
+                  </div>
+                  <label>Password</label>
+                  <div class="input-group mb-3">
+                    <input type="input" class="form-control" name="NewPassword" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Create user</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
 
+<script>
+// SUBMIT - Called when submit button is pressed. (Uses POST to add a new student)
+  // Create Django Ajax Call for Adding a Student
+  $("form#addUser").submit(function() {
+      var nameInput = $('input[name="NewUsername"]').val().trim();
+      var emailInput = $('input[name="NewEmail"]').val().trim();
+      var roleInput = $('input[name="NewRole"]').val().trim();
+      var teamInput = $('input[name="NewTeam"]').val().trim();
+      var passwordInput = $('input[name="NewPassword"]').val().trim();
+      if (nameInput && emailInput && passwordInput && roleInput && teamInput ) {
+          // Create Ajax Call
+          $.ajax({
+            url :"{% url 'new_user' %}",
+                method : "POST",
+                data : $("#addUser").serializeArray(),
+                beforeSend : function(xhr){
+                    xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+              success: function(data) {
+                  if (true) {
+                    alert("Good")
+                  }
+              }
+          });
+        } else {
+          alert("All fields must have a valid value.");
+      }
+      $('form#addStudent').trigger("reset");
+      return false;
+  });
+
 {# Edit user (on click), this presents the modal with the prepopulated values of the user you've clicked on#}
 {# The update PUT request is handled in the 'Save Changes' button. - all this does is fill in the fields of the modal#}
-<script>
+
     function editUser(id) {
         if (id) {
           tr_id = "#user-" + id;
           name = $(tr_id).find(".usernameField").text();
           email = $(tr_id).find(".emailField").text();
           role = $(tr_id).find(".roleField").text();
+          team = $(tr_id).find(".teamField").text();
           $('#form-id').val(id);
           $('#form-name').val(name);
           $('#form-email').val(email);
           $('#form-role').val(role);
+          $('#form-team').val(team);
         }
       }
 
