@@ -32,5 +32,8 @@ urlpatterns = [
     # Send email
     path('sendEmail', views.sendEmail),
 
+    # Update user
+    path('update_user/', views.update_user, name='update_user'),
+
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),]
