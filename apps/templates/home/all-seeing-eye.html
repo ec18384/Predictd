@@ -7,7 +7,58 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+<script>
+    window.onLoad(document.getElementById("teamView").style.visibility = "hidden" )
+</script>
+
+<script>
+function teamsClicked(){
+     window.onLoad(document.getElementById("userView").style.visibility = "visible")
+     window.onLoad(document.getElementById("teamView").style.visibility = "hidden")
+}
+
+</script>
+</script>
+{##}
+{#<!-- Sign Up Modal -->#}
+{#    <div class="modal fade" id="exampleModalSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignTitle" aria-hidden="true">#}
+{#      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">#}
+{#        <div class="modal-content">#}
+{#          <div class="modal-body p-0">#}
+{#            <div class="card card-plain">#}
+{#              <div class="card-header pb-0 text-left">#}
+{#                  <h3 class="font-weight-bolder text-primary text-gradient">New user</h3>#}
+{#                  <p class="mb-0">Use the form below to register a new user on their behalf. The default password is 'Sp@c3X_T-54321'</p>#}
+{#              </div>#}
+{#              <div class="card-body pb-3">#}
+{#                <form role="form text-left">#}
+{#                  <label>Name</label>#}
+{#                  <div class="input-group mb-3">#}
+{#                    <input type="text" class="form-control" name="newUsername">#}
+{#                  </div>#}
+{#                  <label>Email</label>#}
+{#                  <div class="input-group mb-3">#}
+{#                    <input type="email" class="form-control" name="newUserEmail">#}
+{#                  </div>#}
+{#                  <label>Role</label>#}
+{#                  <div class="input-group mb-3">#}
+{#                    <input type="email" class="form-control" name="newUserRole">#}
+{#                  </div>#}
+{#                  <label>Password</label>#}
+{#                  <div class="input-group mb-3">#}
+{#                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">#}
+{#                  </div>#}
+{#                  <div class="text-center">#}
+{#                    <button type="button" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Create user</button>#}
+{#                  </div>#}
+{#                </form>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+
+    <div class="container-fluid" id="userView">
       <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/static/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
       </div>
@@ -27,7 +78,7 @@
                 All Seeing Eye - Logged in as {{ user.get_username }}
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                Edit the table values inline below by clicking on them
+                Edit the table values using the Edit button
               </p>
             </div>
           </div>
@@ -86,7 +137,12 @@
                         </g>
                       </g>
                     </svg>
-                    <span class="ms-1">New User</span>
+                    <span class="ms-1">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
+                          New User
+                        </button>
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -101,41 +157,38 @@
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Technology</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username and Email</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Job Role</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last Logged In</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Joined</th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
               </thead>
               <tbody>
               {% for user in users %}
-                <tr>
+                <tr id="user-{{user.id}}">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
                         <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-xs" contenteditable='true'>{{ user.username }}</h6>
-                        <p contentEditable='true' class="text-xs text-secondary mb-0">{{ user.email }}</p>
+                        <h6 class="usernameField mb-0 text-xs" >{{ user.username }}</h6>
+                        <p class="emailField text-xs text-secondary mb-0">{{ user.email }}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <p contentEditable='true' class="text-xs font-weight-bold mb-0">{{ user.profile.role }}</p>
-                    <p contentEditable='true' class="text-xs text-secondary mb-0">Team Here</p>
+                    <p class="roleField text-xs font-weight-bold mb-0">{{ user.profile.role }}</p>
                   </td>
                   <td class="align-middle text-center text-sm" >
-                    <span contentEditable='true' class="badge badge-sm bg-gradient-success">{{ user.profile.mbti_type }}</span>
+                    <span class="text-secondary text-xs font-weight-bold">{{ user.last_login }}</span>
                   </td>
                   <td class="align-middle text-center">
-                    <span contentEditable='true' class="text-secondary text-xs font-weight-bold">{{ user.date_joined }}</span>
+                    <span class="text-secondary text-xs font-weight-bold">{{ user.date_joined }}</span>
                   </td>
                   <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
+                    <button class="btn text-xs font-weight-bold mb-0 form-control" onClick="editUser({{user.id}})" data-bs-toggle="modal" data-bs-target="#myModal">Edit</button>
                   </td>
                 </tr>
               </tbody>
@@ -145,10 +198,82 @@
         </div>
     </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Edit user</h4>
+        </div>
+        <form id="updateUser" action="">
+        <div class="modal-body">
+            <label>User ID</label>
+            <div class="input-group mb-3">
+                <input class="form-control" id="form-id" readonly="true" name="formId">
+            </div>
+            <label>Username</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="form-name" name="formName">
+            </div>
+            <label>Email</label>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" id="form-email" name="formEmail">
+            </div>
+            <label>Role</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="form-role"name="formRole">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
+
+{# Edit user (on click), this presents the modal with the prepopulated values of the user you've clicked on#}
+{# The update PUT request is handled in the 'Save Changes' button. - all this does is fill in the fields of the modal#}
+<script>
+    function editUser(id) {
+        if (id) {
+          tr_id = "#user-" + id;
+          name = $(tr_id).find(".usernameField").text();
+          email = $(tr_id).find(".emailField").text();
+          role = $(tr_id).find(".roleField").text();
+          $('#form-id').val(id);
+          $('#form-name').val(name);
+          $('#form-email').val(email);
+          $('#form-role').val(role);
+        }
+      }
+
+// Save Changes - This button takes the newly edited modal values and updates the server.
+// Uses a PUT request to update the current student
+$("form#updateUser").submit(function() {
+  console.log("Updating user")
+            $.ajax({
+                url :"{% url 'update_user' %}",
+                method : "PUT",
+                data : $("#updateUser").serializeArray(),
+                beforeSend : function(xhr){
+                    xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+                success : function(data){
+                  if (data.user) {
+                      console.log("Successfully updated user")
+                    appendToStudentTable(data.user);
+                  }
+                }
+            })
+});
+</script>
 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -161,3 +286,4 @@
   </script>
   
 {% endblock javascripts %}
+

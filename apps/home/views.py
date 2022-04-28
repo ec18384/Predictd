@@ -9,7 +9,7 @@ import null as null
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict, JsonResponse
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
 from django.template.loader import render_to_string
@@ -254,3 +254,24 @@ def sendEmail(request):
     print("Email successfully sent")
 
     return HttpResponse(json.dumps({'Success': 'Your email was sent!'}), content_type='application/json')
+
+
+# PUT Request to update an existing user
+@login_required(login_url="/login/")
+def update_user(request):
+    request = QueryDict(request.body)
+    print(request)
+    user = User.objects.get(id=request.get('formId'))
+    profile = user.profile
+
+    user.username = request.get('formName')
+    user.email = request.get('formEmail')
+    profile.role = request.get('formRole')
+
+    user.save()
+
+    return JsonResponse({
+        'name': user.username,
+        'email': user.email,
+        'role': profile.role
+    })

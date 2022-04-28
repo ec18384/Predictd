@@ -52,13 +52,20 @@ This software has been heavily modified from the original. And is referenced abo
     {% block content %}{% endblock content %}
 
   </main>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
   {% include "includes/fixed-plugin.html" %}
 
   {% include "includes/scripts.html" %}
 
   <!-- Specific JS goes HERE --> 
-  {% block javascripts %}{% endblock javascripts %}
+  {% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  {% endblock javascripts %}
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
