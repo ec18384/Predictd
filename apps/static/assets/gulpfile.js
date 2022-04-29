@@ -15,7 +15,7 @@ var Paths = {
     SCSS: './scss/**/**'
 };
 
-gulp.task('scss', function() {
+gulp.task('scss', function () {
     return gulp.src(Paths.SCSS_TOOLKIT_SOURCES)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -26,10 +26,10 @@ gulp.task('scss', function() {
 
 
 // Minify CSS
-gulp.task('minify:css', function() {
+gulp.task('minify:css', function () {
     return gulp.src(Paths.CSS + '/soft-ui-dashboard.css')
         .pipe(cleanCss())
-        .pipe(rename(function(path) {
+        .pipe(rename(function (path) {
             // Updates the object in-place
             path.extname = ".min.css";
         }))

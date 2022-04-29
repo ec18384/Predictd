@@ -1,13 +1,15 @@
-html *{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 body {
   color: $font-color;
   font-weight: $font-weight-normal;
   line-height: $p-line-height;
   background-color: $body-bg;
 }
+
 h1, .h1,
 h2, .h2,
 h3, .h3,
@@ -108,6 +110,7 @@ a {
 .text-sm {
   line-height: $text-sm-line-height;
 }
+
 .text-xs {
   line-height: $text-xs-line-height;
 }
@@ -115,18 +118,23 @@ a {
 p, .p {
   @include font-size($p-font-size);
 }
+
 .lead {
   @include font-size($lead-font-size);
 }
+
 .text-lg {
   @include font-size($font-size-lg !important);
 }
+
 .text-sm {
   @include font-size($font-size-sm !important);
 }
+
 .text-xs {
   @include font-size($font-size-xs !important);
 }
+
 .text-xxs {
   @include font-size($font-size-xxs !important);
 }
@@ -143,6 +151,7 @@ p {
 .text-sans-serif {
   font-family: $font-family-sans-serif !important;
 }
+
 .text-monospace {
   font-family: $font-family-monospace !important;
 }
@@ -182,6 +191,7 @@ p {
     }
   }
 }
+
 // Transformation
 .text-lowercase {
   text-transform: lowercase !important;
@@ -194,6 +204,7 @@ p {
 .text-capitalize {
   text-transform: capitalize !important;
 }
+
 // Weight and italics
 .font-weight-light {
   font-weight: $font-weight-light !important;
@@ -218,6 +229,7 @@ p {
 .font-italic {
   font-style: italic !important;
 }
+
 // Contextual colors
 
 .text-gradient {
@@ -230,18 +242,23 @@ p {
   &.text-primary {
     background-image: $text-gradient-bg-primary;
   }
+
   &.text-info {
     background-image: $text-gradient-bg-info;
   }
+
   &.text-success {
     background-image: $text-gradient-bg-success;
   }
+
   &.text-warning {
     background-image: $text-gradient-bg-warning;
   }
+
   &.text-danger {
     background-image: $text-gradient-bg-danger;
   }
+
   &.text-dark {
     background-image: $text-gradient-bg-dark;
   }
@@ -249,6 +266,7 @@ p {
 
 .blockquote {
   border-left: 3px solid $text-muted;
+
   > span {
     font-style: italic;
   }
@@ -273,6 +291,7 @@ p {
 .text-break {
   word-wrap: break-word !important;
 }
+
 // Reset
 .text-reset {
   color: inherit !important;
@@ -283,9 +302,11 @@ p {
 .letter-wider {
   letter-spacing: $letter-wider;
 }
+
 .letter-normal {
   letter-spacing: $letter-normal;
 }
+
 .letter-tighter {
   letter-spacing: $letter-tighter;
 }
@@ -295,15 +316,19 @@ p {
 .text-lighter {
   font-weight: $font-weight-lighter;
 }
+
 .text-light {
   font-weight: $font-weight-light;
 }
+
 .text-normal {
   font-weight: $font-weight-normal;
 }
+
 .text-bold {
   font-weight: $font-weight-bold;
 }
+
 .text-bolder {
   font-weight: $font-weight-bolder;
 }

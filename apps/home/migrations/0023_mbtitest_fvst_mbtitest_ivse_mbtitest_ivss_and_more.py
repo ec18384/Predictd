@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('home', '0022_remove_mbtitest_profile_picture_and_more'),
     ]

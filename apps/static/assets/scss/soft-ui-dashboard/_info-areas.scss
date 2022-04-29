@@ -70,6 +70,7 @@
 .icon-lg {
   width: $icon-lg-width;
   height: $icon-lg-height;
+
   i {
     top: $info-icon-top-lg;
     font-size: $font-size-xl;
@@ -113,6 +114,7 @@
   .icon {
     float: left;
   }
+
   .description {
     overflow: hidden;
   }
@@ -124,54 +126,67 @@ svg.text-primary {
   .color-foreground {
     fill: $primary-gradient;
   }
+
   .color-background {
     fill: $primary-gradient-state;
   }
 }
+
 svg.text-secondary {
   .color-foreground {
     fill: $secondary-gradient;
   }
+
   .color-background {
     fill: $secondary-gradient-state;
   }
 }
+
 svg.text-info {
   .color-foreground {
     fill: $info-gradient;
   }
+
   .color-background {
     fill: $info-gradient-state;
   }
 }
+
 svg.text-warning {
   .color-foreground {
     fill: $warning-gradient;
   }
+
   .color-background {
     fill: $warning-gradient-state;
   }
 }
+
 svg.text-danger {
   .color-foreground {
     fill: $danger-gradient;
   }
+
   .color-background {
     fill: $danger-gradient-state;
   }
 }
+
 svg.text-success {
   .color-foreground {
     fill: $success-gradient;
   }
+
   .color-background {
     fill: $success-gradient-state;
   }
 }
+
 svg.text-dark {
   .color-foreground {
     fill: $dark-gradient;
   }
+
   .color-background {
     fill: $dark-gradient-state;
   }

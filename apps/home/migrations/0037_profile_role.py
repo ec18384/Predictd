@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('home', '0036_alter_mbtimodel_communication_and_more'),
     ]

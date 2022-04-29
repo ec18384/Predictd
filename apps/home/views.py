@@ -2,35 +2,50 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-import profile
-from xmlrpc.client import Boolean
+
+import json
 
 import null as null
+import requests
 from django import template
-from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.models import Avg
 from django.http import HttpResponse, HttpResponseRedirect, QueryDict, JsonResponse
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render
 from django.template import loader
-from django.template.loader import render_to_string
 from django.urls import reverse
-import requests
-import json
-import re
-
 from django.utils.html import format_html
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
 from .models import *
+
+
+# Program to find most frequent
+# element in a list
+def most_frequent(List):
+    return max(set(List), key=List.count)
 
 
 @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
+    totalUsers = User.objects.count()
+    totalTestsRan = MBTITest.objects.count()
+    averageTestAccuracy = MBTITest.objects.aggregate(Avg("probability"))
+    averageTestAccuracy = averageTestAccuracy["probability__avg"]
+    averageTestAccuracy = "{:.2f}".format(averageTestAccuracy)
+    typeOccurrenceList = list(MBTITest.objects.all().values_list('type', flat=True))
+    mostCommonType = most_frequent(typeOccurrenceList)
+
+    context = {'segment': 'index',
+               "totalUsers": totalUsers,
+               "totalTestsRan": totalTestsRan,
+               "averageTestAccuracy": averageTestAccuracy,
+               "mostCommonType": mostCommonType}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -62,6 +77,7 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 
+@login_required(login_url="/login/")
 def get_LinkedinSummary(request):
     response = ""
     if request.method == 'GET':
@@ -137,6 +153,7 @@ def get_LinkedinSummary(request):
     return HttpResponse(response, content_type='application/json')
 
 
+@login_required(login_url="/login/")
 def mbti_detail_view(request):
     allMBTITests = MBTITest.objects.all().order_by('-date')
     context = {
@@ -147,6 +164,7 @@ def mbti_detail_view(request):
 
 
 # Run external API prediction request
+@login_required(login_url="/login/")
 def predict(request):
     # Get input to run test on
     input = str(request.GET.get("input"))
@@ -205,6 +223,7 @@ def predict(request):
     return HttpResponse(responseJson, content_type='application/json')
 
 
+@login_required(login_url="/login/")
 def mbtiTypeResponse(request):
     print(request.GET.get("type"))
     type = request.GET.get("type")
@@ -216,6 +235,8 @@ def mbtiTypeResponse(request):
 
     return render(request, 'home/profile.html', context)
 
+
+@login_required(login_url="/login/")
 def profileRedirect(request):
     userId = request.user.id
     userData = User.objects.get(pk=userId)
@@ -234,15 +255,27 @@ def profileRedirect(request):
         return HttpResponseRedirect('classify-user.html')
 
 
+@login_required(login_url="/login/")
 def getUsers(request):
     users = User.objects.all().order_by('-last_login')
     context = {
         "users": users,
     }
 
-    return render(request, 'home/all-seeing-eye.html', context)
+    return render(request, 'home/HR-Editor.html', context)
 
 
+@login_required(login_url="/login/")
+def getUsersForLMView(request):
+    users = User.objects.all().order_by('-last_login')
+    context = {
+        "users": users,
+    }
+
+    return render(request, 'home/TH-Editor.html', context)
+
+
+@login_required(login_url="/login/")
 def sendEmail(request):
     # Send a welcome email on form submit
     sender = request.GET.get("sender")
@@ -250,7 +283,8 @@ def sendEmail(request):
     target = request.GET.get("target")
     plain_message = request.GET.get("message")
     html_message = format_html(plain_message)
-    send_mail(subject, plain_message, settings.EMAIL_HOST_USER, [target], fail_silently=False, html_message=html_message)
+    send_mail(subject, plain_message, settings.EMAIL_HOST_USER, [target], fail_silently=False,
+              html_message=html_message)
 
     print("Email successfully sent")
 
@@ -279,7 +313,9 @@ def update_user(request):
         'team': profile.team,
     })
 
+
 # POST Request to create a new user
+@login_required(login_url="/login/")
 def new_user(request):
     request = request
     name = request.POST.get('NewUsername')
@@ -308,3 +344,20 @@ def new_user(request):
         'role': user.profile.role,
         'team': user.profile.team,
     })
+
+
+# POST Request to release desired user from a team
+@login_required(login_url="/login/")
+def releaseUser(request):
+    user = User.objects.get(id=request.GET.get('id'))
+    profile = user.profile
+
+    profile.team = "Unclaimed"
+
+    profile.save()
+
+    return JsonResponse({
+        "Result": "Success",
+    })
+
+    return render(request, 'home/index.html', context)

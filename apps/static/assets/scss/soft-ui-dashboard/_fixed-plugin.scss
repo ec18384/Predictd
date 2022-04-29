@@ -1,5 +1,5 @@
-.fixed-plugin{
-  .fixed-plugin-button{
+.fixed-plugin {
+  .fixed-plugin-button {
     background: rgba($gray-200, .9);
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
@@ -8,16 +8,18 @@
     font-size: $font-size-xl;
     z-index: $fixed-plugin-button-z-index;
     cursor: pointer;
-    i{
+
+    i {
       pointer-events: none;
     }
   }
-  .card{
+
+  .card {
     position: fixed !important;
     right: -$fixed-plugin-card-width;
     top: 0;
     height: 100%;
-    left: auto!important;
+    left: auto !important;
     transform: unset !important;
     width: $fixed-plugin-card-width;
     border-radius: 0;
@@ -26,7 +28,7 @@
     z-index: $fixed-plugin-card-z-index;
   }
 
-  .badge{
+  .badge {
     border: 1px solid $white;
     border-radius: 50%;
     cursor: pointer;
@@ -36,15 +38,17 @@
     position: relative;
     width: 23px;
     transition: $transition-base;
+
     &:hover,
-    &.active{
+    &.active {
       border-color: $dark;
     }
   }
 
-  .btn.bg-gradient-primary:not(:disabled):not(.disabled){
+  .btn.bg-gradient-primary:not(:disabled):not(.disabled) {
     border: 1px solid transparent;
-    &:not(.active){
+
+    &:not(.active) {
       background-color: transparent;
       background-image: none;
       border: 1px solid $primary;
@@ -52,8 +56,8 @@
     }
   }
 
-  &.show{
-    .card{
+  &.show {
+    .card {
       right: 0;
     }
   }

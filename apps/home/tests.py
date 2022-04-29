@@ -1,5 +1,3 @@
-import string
-import random
 import time
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -12,37 +10,36 @@ class FunctionalTests(StaticLiveServerTestCase):
     # fixtures = ['masterDatabase.json']
 
     def testSummaryScrape(self):
+        driver = webdriver.Chrome('apps/home/chromedriver')
 
-            driver = webdriver.Chrome('apps/home/chromedriver')
+        # direct the webdriver to where the browser file is:
+        # your secret credentials:
+        email = "andricozach@gmail.com"
+        password = ",6CWV7TKk(Rr3mJ"
+        # Go to linkedin and login
+        driver.get('https://www.linkedin.com/login')
+        # time.sleep(.5)
+        driver.find_element_by_id('username').send_keys(email)
+        # time.sleep(.5)
+        driver.find_element_by_id('password').send_keys(password)
+        # time.sleep(.5)
+        driver.find_element_by_id('password').send_keys(Keys.RETURN)
+        # time.sleep(1)
 
-            # direct the webdriver to where the browser file is:
-            # your secret credentials:
-            email = "andricozach@gmail.com"
-            password = ",6CWV7TKk(Rr3mJ"
-            # Go to linkedin and login
-            driver.get('https://www.linkedin.com/login')
-            # time.sleep(.5)
-            driver.find_element_by_id('username').send_keys(email)
-            # time.sleep(.5)
-            driver.find_element_by_id('password').send_keys(password)
-            # time.sleep(.5)
-            driver.find_element_by_id('password').send_keys(Keys.RETURN)
-            # time.sleep(1)
+        # Go to sign up page
+        driver.get('https://www.linkedin.com/in/andrico')
+        time.sleep(3)
 
-            # Go to sign up page
-            driver.get('https://www.linkedin.com/in/andrico')
-            time.sleep(3)
+        aboutSection = driver.find_elements_by_xpath(xpath="//div[3]/div/div/div/span")
 
-            aboutSection = driver.find_elements_by_xpath(xpath="//div[3]/div/div/div/span")
+        aboutText = ""
 
-            aboutText = ""
+        for elements in aboutSection:
+            aboutText += elements.text
 
-            for elements in aboutSection:
-                aboutText += elements.text
+        print(aboutText)
 
-            print(aboutText)
+        response = aboutText
 
-            response = aboutText
-
-            # Finish test and quit driver
-            driver.quit()
+        # Finish test and quit driver
+        driver.quit()
