@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} HR Editor {% endblock title %}
+{% block title %} HR Admin Panel {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,14 +15,15 @@
                 <div class="col-auto my-auto" style="padding-bottom: 0px;">
                     <div class="h-100">
                         <h4 class="mb-1">
-                            HR Editor<br>
-                            Logged in as {{ user.get_username }} ({{ user.profile.role }})
+                            Welcome to the HR Admin Panel<br>
                         </h4>
+                        <h6>Logged in as {{ user.get_username }} ({{ user.profile.role }})</h6>
                         <br>
                         <p class="mb-0 font-weight-bold text-sm">
                             This page exclusively allows HR Administrators to do the following:<br>
-                            - Manually add a new user<br>
-                            - Update profiles of existing users<br>
+                            - Manually Add New User<br>
+                            - Update Existing Employee Data<br>
+                            - Update their own profile<br>
                             <br>
                             Notice: If you are not a HR Administrator you will not see any 'Edit' buttons or the
                             'Manually Add User' button.
@@ -61,7 +62,7 @@
                                             </g>
                                         </svg>
                                         <span id="generateButton" class="ms-1" data-bs-toggle="modal"
-                                              data-bs-target="#newUserModal">Manually Add User</span>
+                                              data-bs-target="#newUserModal">Manually Add New User</span>
 
                                     </a>
                                 </li>
@@ -72,9 +73,10 @@
             </div>
         </div>
     </div>
+
     <div class="container-fluid py-4">
-        <div class="card card-body blur shadow-blur mx-4 mt-n6"
-        ">
+        <div class="card card-body blur shadow-blur mx-4 mt-n6">
+        <h6>Employee's with unassigned  Role and/or Team:</h6>
         <div class="table-responsive">
             <table class="table align-items-center mb-0">
                 <thead>
@@ -94,45 +96,114 @@
                 </thead>
                 <tbody>
                 {% for siteUser in users %}
-                    <tr id="user-{{ siteUser.id }}">
-                        <td>
-                            <div class="d-flex px-2 py-1">
-                                <div>
-                                    <img src="/static/assets/img/profileHolder.png"
-                                         class="avatar avatar-sm me-3">
+                    {% if siteUser.profile.role == "Pending" or siteUser.profile.team == "Pending" %}
+                        <tr id="user-{{ siteUser.id }}">
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="/static/assets/img/profileHolder.png"
+                                             class="avatar avatar-sm me-3">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="usernameField mb-0 text-xs">{{ siteUser.username }}</h6>
+                                        <p class="emailField text-xs text-secondary mb-0">{{ siteUser.email }}</p>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="usernameField mb-0 text-xs">{{ siteUser.username }}</h6>
-                                    <p class="emailField text-xs text-secondary mb-0">{{ siteUser.email }}</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="roleField text-xs font-weight-bold mb-0">{{ siteUser.profile.role }}</p>
-                        </td>
-                        <td>
-                            <p class="teamField text-xs font-weight-bold mb-0">{{ siteUser.profile.team }}</p>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                            <span class="text-secondary text-xs font-weight-bold">{{ siteUser.last_login }}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{ siteUser.date_joined }}</span>
-                        </td>
-                        {% if request.user.profile.role == "HR Administrator" %}
-                            <td class="align-middle" id="editButton">
-                                <button class="btn text-xs font-weight-bold mb-0 form-control"
-                                        onClick="editUser({{ siteUser.id }})" data-bs-toggle="modal"
-                                        data-bs-target="#myModal">Edit
-                                </button>
                             </td>
-                        {% endif %}
-                    </tr>
+                            <td>
+                                <p class="roleField text-xs font-weight-bold mb-0">{{ siteUser.profile.role }}</p>
+                            </td>
+                            <td>
+                                <p class="teamField text-xs font-weight-bold mb-0">{{ siteUser.profile.team }}</p>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <span class="text-secondary text-xs font-weight-bold">{{ siteUser.last_login }}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ siteUser.date_joined }}</span>
+                            </td>
+                            {% if request.user.profile.role == "HR Administrator" %}
+                                <td class="align-middle" id="editButton">
+                                    <button class="btn text-xs font-weight-bold mb-0 form-control"
+                                            onClick="editUser({{ siteUser.id }})" data-bs-toggle="modal"
+                                            data-bs-target="#myModal">Edit
+                                    </button>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
                     </tbody>
                 {% endfor %}
             </table>
         </div>
     </div>
+    </div>
+
+
+    <div>
+        <div class="container-fluid py-4">
+            <div class="card card-body blur shadow-blur mx-4 mt-n6">
+            <h6>All Other Users</h6>
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username and Email
+                        </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Job Role</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Team</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last
+                            Logged In
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date
+                            Joined
+                        </th>
+                        <th class="text-secondary opacity-7"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for siteUser in users %}
+                        {% if siteUser.profile.role != "Pending" and siteUser.profile.team != "Pending" %}
+                            <tr id="user-{{ siteUser.id }}">
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="/static/assets/img/profileHolder.png"
+                                                 class="avatar avatar-sm me-3">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="usernameField mb-0 text-xs">{{ siteUser.username }}</h6>
+                                            <p class="emailField text-xs text-secondary mb-0">{{ siteUser.email }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="roleField text-xs font-weight-bold mb-0">{{ siteUser.profile.role }}</p>
+                                </td>
+                                <td>
+                                    <p class="teamField text-xs font-weight-bold mb-0">{{ siteUser.profile.team }}</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-secondary text-xs font-weight-bold">{{ siteUser.last_login }}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{ siteUser.date_joined }}</span>
+                                </td>
+                                {% if request.user.profile.role == "HR Administrator" %}
+                                    <td class="align-middle" id="editButton">
+                                        <button class="btn text-xs font-weight-bold mb-0 form-control"
+                                                onClick="editUser({{ siteUser.id }})" data-bs-toggle="modal"
+                                                data-bs-target="#myModal">Edit
+                                        </button>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div></div>
+      </div>
     </div>
 
     <!-- Edit User Modal -->
@@ -183,8 +254,8 @@
                 <div class="modal-body p-0">
                     <div class="card card-plain">
                         <div class="card-header pb-0 text-left">
-                            <h4 class="font-weight-bolder text-dark text-gradient">Manually Add User</h4>
-                            <p id="formDesc" class="mb-0">As a superuser, you can the form below to manually add a new
+                            <h4 class="font-weight-bolder text-dark text-gradient">Manually Add New User</h4>
+                            <p id="formDesc" class="mb-0">As a HR Administrator, you can the form below to manually add a new
                                 user to the system</p>
                         </div>
                         <div class="card-body pb-3">

@@ -19772,7 +19772,7 @@ p {
     top: 0;
     bottom: 0;
     width: 100%;
-    max-width: 15.625rem !important;
+    max-width: 16rem !important;
     overflow-y: auto;
     padding: 0;
     box-shadow: none;
@@ -19781,7 +19781,6 @@ p {
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
     display: block;
     overflow: auto;
-    height: calc(100vh - 360px);
 }
 
 .navbar-vertical.navbar-expand-xs > [class*="container"] {

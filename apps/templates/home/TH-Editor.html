@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Team Head Editor {% endblock title %}
+{% block title %} Team Head Admin Panel {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -9,7 +9,7 @@
 
     {% csrf_token %}
 
-    <div class="container-fluid py-4" id="userView">
+    <div class="container-fluid py-4" style="padding-top: 30px" id="userView">
         <div class="card card-body blur shadow-blur mx-4 mt-n6">
             <div class="row gx-4">
                 <div class="col-auto">
@@ -17,16 +17,16 @@
                 <div class="col-auto my-auto" style="padding-bottom: 0px;">
                     <div class="h-100">
                         <h4 class="mb-1">
-                            Team Head Editor<br>
-                            Logged in as {{ user.get_username }} ({{ user.profile.role }})
+                            Team Head Admin Panel<br>
                         </h4>
+                        <h6>Logged in as {{ user.get_username }} ({{ user.profile.role }})</h6>
                         <br>
                         <p class="mb-0 font-weight-bold text-sm">
                             This page exclusively allows Team Heads to do the following:<br>
                             - View Team Overview<br>
                             - View Team Skew<br>
                             - View Employee MBTI Type<br>
-                            - View Employee Work Styles
+                            - View Employee Work Styles<br>
                             <br>
                             Notice: If you are not a Team Head you will not see any 'Edit' buttons or the 'Manually Add
                             User' button.

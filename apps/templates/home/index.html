@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <div class="container-fluid" style="padding-top: 60px; ">
+    <div class="container-fluid" style="padding-top: 30px; ">
 
         <div class="row" style="padding-bottom: 60px">
             <div class="col-lg-7 mb-lg-0 mb-4">
@@ -23,11 +23,6 @@
                                         tabs on the left.</p>
                                     <p>If you are a HR Administrator or Team Lead, you have additional functionality via
                                         the utilities pages on the left.</p>
-                                    <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
-                                       href="javascript:">
-                                        Read More
-                                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                                    </a>
                                 </div>
                             </div>
                             <div class="col-lg-5 ms-auto text-center mt-4">
@@ -55,18 +50,13 @@
                             <h5 class="text-white font-weight-light mb-4 pt-2">
                                 <a href="https://www.16personalities.com/" style="color: #b9ecf8" target="_blank">16Personalities</a>
                             </h5>
-                            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto"
-                               href="javascript:">
-                                Read More
-                                <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" style="padding-left: 10px; padding-right: 10px;">
+        <div class="row" style="padding-left: 10px; padding-right: 10px;" >
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <center>
@@ -126,82 +116,84 @@
     </div>
     </div>
 
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
-                                <span class="text-sm">all time:</span>
+    <div class="container-fluid"style="padding-top: 30px">
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
+                                    <span class="text-sm">all time:</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-5 text-end my-auto">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <h4 class="font-weight-bolder vertical-center"
-                                    style="color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ totalUsers }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Tests Ran</p>
-                                <span class="text-sm">all time:</span>
-                            </div>
-                        </div>
-                        <div class="col-5 text-end my-auto">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <h4 class="font-weight-bolder vertical-center"
-                                    style="color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ totalTestsRan }}</h4>
+                            <div class="col-5 text-end my-auto">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <h4 class="font-weight-bolder vertical-center"
+                                        style="color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ totalUsers }}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Average Test Accuracy</p>
-                                <span class="text-sm">in percentage (%):</span>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Tests Ran</p>
+                                    <span class="text-sm">all time:</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-5 text-end my-auto">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <p class="font-weight-bolder vertical-center"
-                                   style="font-size: 15px; color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">
-                                    {{ averageTestAccuracy }}</p>
+                            <div class="col-5 text-end my-auto">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <h4 class="font-weight-bolder vertical-center"
+                                        style="color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ totalTestsRan }}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Most Common Type</p>
-                                <span class="text-sm">all time:</span>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Average Test Accuracy</p>
+                                    <span class="text-sm">in percentage (%):</span>
+                                </div>
+                            </div>
+                            <div class="col-5 text-end my-auto">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <p class="font-weight-bolder vertical-center"
+                                       style="font-size: 15px; color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">
+                                        {{ averageTestAccuracy }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-5 text-end my-auto">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <h4 class="font-weight-bolder vertical-center"
-                                    style="font-size: 15px; color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ mostCommonType }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Most Common Type</p>
+                                    <span class="text-sm">all time:</span>
+                                </div>
+                            </div>
+                            <div class="col-5 text-end my-auto">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <h4 class="font-weight-bolder vertical-center"
+                                        style="font-size: 15px; color: #e7eaec;   text-align: center;  position: relative;  top: 50%; -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%);">{{ mostCommonType }}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>

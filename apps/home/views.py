@@ -157,6 +157,7 @@ def get_LinkedinSummary(request):
 def mbti_detail_view(request):
     allMBTITests = MBTITest.objects.all().order_by('-date')
     context = {
+        'segment': 'history',
         "allMBTITests": allMBTITests,
     }
 
@@ -230,6 +231,7 @@ def mbtiTypeResponse(request):
 
     mbtiTypeData = mbtiModel.objects.get(typeName=type)
     context = {
+        'segment': 'profile',
         "mbtiTypeData": mbtiTypeData,
     }
 
@@ -259,6 +261,7 @@ def profileRedirect(request):
 def getUsers(request):
     users = User.objects.all().order_by('-last_login')
     context = {
+        'segment': 'hreditor',
         "users": users,
     }
 
@@ -269,6 +272,7 @@ def getUsers(request):
 def getUsersForLMView(request):
     users = User.objects.all().order_by('-last_login')
     context = {
+        'segment': 'theditor',
         "users": users,
     }
 
@@ -352,7 +356,8 @@ def releaseUser(request):
     user = User.objects.get(id=request.GET.get('id'))
     profile = user.profile
 
-    profile.team = "Unclaimed"
+    profile.role = "Pending"
+    profile.team = "Pending"
 
     profile.save()
 
