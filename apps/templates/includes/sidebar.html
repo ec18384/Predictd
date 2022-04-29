@@ -2,7 +2,7 @@
        id="sidenav-main">
     <div class="sidenav-header">
         <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/">
-            <img src="/static/assets/img/illustrations/small_logo_greybg.png" width="160px" height="40px">
+            <img id="logo" src="/static/assets/img/illustrations/small_logo_greybg.png" width="160px" height="40px">
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -121,7 +121,7 @@
                 <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Utilities pages</h6>
             </li>
             <li class="nav-item mb-1">
-                <a class="nav-link  " href="/HR-Editor.html">
+                <a class="nav-link {% if 'hreditor' in segment %} active {% endif %}" href="/HR-Editor.html">
                     <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -149,11 +149,11 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">HR Editor</span>
+                    <span class="nav-link-text ms-1">HR Admin Panel</span>
                 </a>
             </li>
             <li class="nav-item mb-1">
-                <a class="nav-link  " href="/TH-Editor.html">
+                <a class="nav-link {% if 'theditor' in segment %} active {% endif %}" href="/TH-Editor.html">
                     <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +181,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Team Head Editor</span>
+                    <span class="nav-link-text ms-1" style="font-size: 14px">Team Head Admin Panel</span>
                 </a>
             </li>
         </ul>
