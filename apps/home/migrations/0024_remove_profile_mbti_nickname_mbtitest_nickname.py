@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('home', '0023_mbtitest_fvst_mbtitest_ivse_mbtitest_ivss_and_more'),
     ]

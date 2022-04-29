@@ -1,8 +1,12 @@
 # [Soft UI Dashboard Django](https://www.creative-tim.com/product/soft-ui-dashboard-django) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Material%20Dashboard,%20a%20free%20Material%20Bootstrap%204%20Admin%20Template%20%E2%9D%A4%EF%B8%8F%20https%3A//bit.ly/2Lyat1Y%20%23bootstrap%20%23material%20%23design%20%23developers%20%23freebie%20%20via%20%40CreativeTim)
 
- ![version](https://img.shields.io/badge/version-1.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/soft-ui-dashboard-django.svg?maxAge=2592000)](https://github.com/creativetimofficial/soft-ui-dashboard-django/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/soft-ui-dashboard-django.svg?maxAge=2592000)](https://github.com/creativetimofficial/soft-ui-dashboard-django/issues?q=is%3Aissue+is%3Aclosed) [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim-general/Lobby) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
+![version](https://img.shields.io/badge/version-1.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/soft-ui-dashboard-django.svg?maxAge=2592000)](https://github.com/creativetimofficial/soft-ui-dashboard-django/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/soft-ui-dashboard-django.svg?maxAge=2592000)](https://github.com/creativetimofficial/soft-ui-dashboard-django/issues?q=is%3Aissue+is%3Aclosed) [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim-general/Lobby) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
 
-Open-source **[Django Template](https://www.creative-tim.com/templates/django)** crafted on top of **Soft UI Dashboard**, a modern Bootstrap 5 design. Start your development with a modern Bootstrap 5 Admin template for Django. Soft UI Dashboard is built with over 70 individual components, giving you the freedom of choosing and combining. If you want to code faster, with a smooth workflow, then you should try this template carefully developed with Django, a well-known Python Framework.
+Open-source **[Django Template](https://www.creative-tim.com/templates/django)** crafted on top of **Soft UI Dashboard**
+, a modern Bootstrap 5 design. Start your development with a modern Bootstrap 5 Admin template for Django. Soft UI
+Dashboard is built with over 70 individual components, giving you the freedom of choosing and combining. If you want to
+code faster, with a smooth workflow, then you should try this template carefully developed with Django, a well-known
+Python Framework.
 
 > Features
 
@@ -93,7 +97,9 @@ $ # Access the web app in browser: http://127.0.0.1:8000/
 <br />
 
 ## Documentation
-The documentation for the **Soft UI Dashboard Django** is hosted at our [website](https://www.creative-tim.com/learning-lab/bootstrap/build-tools-free/soft-ui-dashboard).
+
+The documentation for the **Soft UI Dashboard Django** is hosted at
+our [website](https://www.creative-tim.com/learning-lab/bootstrap/build-tools-free/soft-ui-dashboard).
 
 <br />
 
@@ -171,9 +177,9 @@ To recompile SCSS files, follow this setup:
 **Step #1** - Install tools
 
 - [NodeJS](https://nodejs.org/en/) 12.x or higher
-- [Gulp](https://gulpjs.com/) - globally 
+- [Gulp](https://gulpjs.com/) - globally
     - `npm install -g gulp-cli`
-- [Yarn](https://yarnpkg.com/) (optional) 
+- [Yarn](https://yarnpkg.com/) (optional)
 
 <br />
 
@@ -195,7 +201,7 @@ $ yarn
 
 <br />
 
-**Step #4** - Edit & Recompile SCSS files 
+**Step #4** - Edit & Recompile SCSS files
 
 ```bash
 $ gulp scss
@@ -207,7 +213,8 @@ The generated file is saved in `static/assets/css` directory.
 
 ## Deployment
 
-The app is provided with a basic configuration to be executed in [Docker](https://www.docker.com/), [Gunicorn](https://gunicorn.org/), and [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/).
+The app is provided with a basic configuration to be executed in [Docker](https://www.docker.com/)
+, [Gunicorn](https://gunicorn.org/), and [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/).
 
 ### [Docker](https://www.docker.com/) execution
 ---
@@ -252,9 +259,11 @@ At present, we officially aim to support the last two versions of the following 
 
 ## Reporting Issues
 
-We use GitHub Issues as the official bug tracker for the **Soft UI Dashboard Django**. Here are some advices for our users that want to report an issue:
+We use GitHub Issues as the official bug tracker for the **Soft UI Dashboard Django**. Here are some advices for our
+users that want to report an issue:
 
-1. Make sure that you are using the latest version of the **Soft UI Dashboard Django**. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/).
+1. Make sure that you are using the latest version of the **Soft UI Dashboard Django**. Check the CHANGELOG from your
+   dashboard on our [website](https://www.creative-tim.com/).
 2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
 3. Some issues may be browser-specific, so specifying in what browser you encountered the issue might help.
 
@@ -262,7 +271,8 @@ We use GitHub Issues as the official bug tracker for the **Soft UI Dashboard Dja
 
 ## Technical Support or Questions
 
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
+If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us)
+instead of opening an issue.
 
 <br />
 
@@ -292,4 +302,5 @@ If you have questions or need help integrating the product please [contact us](h
 <br />
 
 ---
-[Soft UI Dashboard - Django Template](https://www.creative-tim.com/product/soft-ui-dashboard-django) - Provided by [Creative Tim](https://www.creative-tim.com/) and [AppSeed](https://appseed.us)
+[Soft UI Dashboard - Django Template](https://www.creative-tim.com/product/soft-ui-dashboard-django) - Provided
+by [Creative Tim](https://www.creative-tim.com/) and [AppSeed](https://appseed.us)

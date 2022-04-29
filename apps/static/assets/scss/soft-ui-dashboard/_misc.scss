@@ -18,6 +18,7 @@
   &.blur-light {
     background-color: $blur-light-background;
   }
+
   &.blur-dark {
     background-color: $blur-dark-background;
   }
@@ -103,6 +104,7 @@ hr.horizontal {
   &.light {
     background-image: $hr-horizontal-bg-image-light;
   }
+
   &.dark {
     background-image: $hr-horizontal-bg-image-dark;
   }
@@ -192,6 +194,7 @@ hr.horizontal {
 .wave-rotate {
   transform: $waves-rotate;
 }
+
 /* Animation for the waves */
 .moving-waves > use {
   animation: $moving-waves-animation;
@@ -226,6 +229,7 @@ hr.horizontal {
   animation-delay: $moving-waves-child-6-delay;
   animation-duration: $moving-waves-child-6-duration;
 }
+
 @keyframes move-forever {
   0% {
     transform: $moving-waves-keyframe-0;
@@ -235,6 +239,7 @@ hr.horizontal {
     transform: $moving-waves-keyframe-100;
   }
 }
+
 /*Shrinking for mobile*/
 @include media-breakpoint-down(md) {
   .waves {

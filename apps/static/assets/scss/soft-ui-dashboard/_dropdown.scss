@@ -8,20 +8,22 @@
   }
 
   .dropdown-toggle {
-    &:after{
+    &:after {
       content: "\f107";
       font: normal normal normal 14px/1 FontAwesome;
       border: none;
       vertical-align: middle;
       font-weight: $font-weight-bold;
     }
-    &.show{
-      &:after{
+
+    &.show {
+      &:after {
         transform: $dropdown-toggle-arrow-transform;
       }
     }
-    &:after{
-        transition: $dropdown-toggle-arrow-transition;
+
+    &:after {
+      transition: $dropdown-toggle-arrow-transition;
     }
   }
 }
@@ -37,11 +39,13 @@
     transform: $dropdown-transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    will-change: transform,box-shadow;
-    &.dropdown-menu-end{
+    will-change: transform, box-shadow;
+
+    &.dropdown-menu-end {
       right: 0;
       left: auto;
-      &:before{
+
+      &:before {
         right: $dropdown-animation-arrow-left-position;
         left: auto;
       }

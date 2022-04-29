@@ -4,6 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.urls import path, re_path
+
 from apps.home import views
 
 urlpatterns = [
@@ -26,8 +27,11 @@ urlpatterns = [
     # Run prediction
     path('predict', views.predict),
 
-    # All Seeing Eye Data
-    path('all-seeing-eye.html', views.getUsers),
+    # HR View Data
+    path('HR-Editor.html', views.getUsers),
+
+    # Team Head View Data
+    path('TH-Editor.html', views.getUsersForLMView),
 
     # Send email
     path('sendEmail', views.sendEmail),
@@ -38,5 +42,8 @@ urlpatterns = [
     # Update user
     path('update_user/', views.update_user, name='update_user'),
 
+    # Release user
+    path('releaseUser', views.releaseUser),
+
     # Matches any html file
-    re_path(r'^.*\.*', views.pages, name='pages'),]
+    re_path(r'^.*\.*', views.pages, name='pages'), ]

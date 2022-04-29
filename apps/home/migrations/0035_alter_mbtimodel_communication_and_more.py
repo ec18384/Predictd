@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('home', '0034_mbtimodel_weaknesses'),
     ]

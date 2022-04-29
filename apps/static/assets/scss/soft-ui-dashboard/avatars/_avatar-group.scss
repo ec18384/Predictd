@@ -5,18 +5,18 @@
 // General styles
 
 .avatar-group {
-	.avatar {
-		position: relative;
-		z-index: $avatar-group-zindex;
-		border: $avatar-group-border solid $card-bg;
+  .avatar {
+    position: relative;
+    z-index: $avatar-group-zindex;
+    border: $avatar-group-border solid $card-bg;
 
-		&:hover {
-			z-index: $avatar-group-zindex-hover;
-		}
-	}
+    &:hover {
+      z-index: $avatar-group-zindex-hover;
+    }
+  }
 
-	.avatar + .avatar {
-		margin-left: $avatar-group-double;
+  .avatar + .avatar {
+    margin-left: $avatar-group-double;
 
-	}
+  }
 }

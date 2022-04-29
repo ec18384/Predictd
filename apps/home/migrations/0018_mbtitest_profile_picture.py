@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('home', '0017_remove_mbtitest_profile_picture'),
     ]
@@ -13,6 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mbtitest',
             name='profile_picture',
-            field=models.ImageField(blank=True, default='/Users/andricozacharia/Desktop/FYP/apps/static', max_length=100000, upload_to='profile_pictures/'),
+            field=models.ImageField(blank=True, default='/Users/andricozacharia/Desktop/FYP/apps/static',
+                                    max_length=100000, upload_to='profile_pictures/'),
         ),
     ]

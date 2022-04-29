@@ -15,6 +15,7 @@
 .h-100-vh {
   height: 100vh;
 }
+
 .section-height-25 {
   min-height: $section-height-25-min-height;
 }
@@ -35,19 +36,22 @@
   min-height: $section-height-100-min-height;
 }
 
-.transform-translate-50{
-  transform: translate(0,-50%)
+.transform-translate-50 {
+  transform: translate(0, -50%)
 }
 
 .border-radius-top-start-0 {
   border-top-left-radius: 0 !important;
 }
+
 .border-radius-top-end-0 {
   border-top-right-radius: 0 !important;
 }
+
 .border-radius-bottom-start-0 {
   border-bottom-left-radius: 0 !important;
 }
+
 .border-radius-bottom-end-0 {
   border-bottom-right-radius: 0 !important;
 }
@@ -235,7 +239,7 @@
 }
 
 // Background Sizes
-.bg-cover{
+.bg-cover {
   background-size: cover;
 }
 
@@ -263,32 +267,38 @@
     padding: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .pt-#{$name} {
     padding-top: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .pe-#{$name} {
     padding-right: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .pb-#{$name} {
     padding-bottom: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .ps-#{$name} {
     padding-left: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .px-#{$name} {
     padding-left: $value !important;
     padding-right: $value !important;
   }
 }
+
 @each $name, $value in $paddings {
   .py-#{$name} {
     padding-top: $value !important;
@@ -658,32 +668,38 @@
     margin: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .mt-#{$name} {
     margin-top: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .me-#{$name} {
     margin-right: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .mb-#{$name} {
     margin-bottom: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .ms-#{$name} {
     margin-left: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .mx-#{$name} {
     margin-left: $value !important;
     margin-right: $value !important;
   }
 }
+
 @each $name, $value in $margins {
   .my-#{$name} {
     margin-top: $value !important;
@@ -1055,16 +1071,19 @@
     margin-top: -$value !important;
   }
 }
+
 @each $name, $value in $margins {
   .me-n#{$name} {
     margin-right: -$value !important;
   }
 }
+
 @each $name, $value in $margins {
   .mb-n#{$name} {
     margin-bottom: -$value !important;
   }
 }
+
 @each $name, $value in $margins {
   .ms-n#{$name} {
     margin-left: -$value !important;
@@ -1248,7 +1267,7 @@
 
 // Gray Bg Colors
 
-.bg-gray{
+.bg-gray {
   background: $gray-500;
 }
 

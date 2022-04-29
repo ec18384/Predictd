@@ -1,38 +1,40 @@
-
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky" navbar-scroll="true">
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
+     navbar-scroll="true">
     <div class="container-fluid px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-1 px-0 me-sm-6 me-12">
-            <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="">Homepage</a></li>
-            <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/profileRedirect.html">Profile</a></li>
-            <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/classify-user.html">Run Classification</a></li>
-            <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/history.html">Past Tests</a></li>
-          </ol>
+            <ol class="breadcrumb bg-transparent mb-0 pb-1 px-0 me-sm-6 me-12">
+                <li class="breadcrumb-item"><a class="opacity-8 text-dark">{{ request.user.username }}</a></li>
+                <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="">Homepage</a></li>
+                <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/profileRedirect.html">Profile</a></li>
+                <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/classify-user.html">Run
+                    Classification</a></li>
+                <li class="breadcrumb-item"><a class="opacity-8 text-dark" href="/history.html">Past Tests</a></li>
+            </ol>
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-4" id="navbar">
-          <ul class="navbar-nav mb-2 mb-sm-0 ms-sm-auto justify-content-sm-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="/logout/" class="nav-link font-weight-bold px-0">
-                Sign Out
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-4 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line bg-dark"></i>
-                  <i class="sidenav-toggler-line bg-dark"></i>
-                  <i class="sidenav-toggler-line bg-dark"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-4 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
-              </a>
-            </li>
-              </ul>
+            <ul class="navbar-nav mb-2 mb-sm-0 ms-sm-auto justify-content-sm-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="/logout/" class="nav-link font-weight-bold px-0">
+                        Sign Out
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none ps-4 d-flex align-items-center">
+                    <a href="javascript:" class="nav-link p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-dark"></i>
+                            <i class="sidenav-toggler-line bg-dark"></i>
+                            <i class="sidenav-toggler-line bg-dark"></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item px-4 d-flex align-items-center">
+                    <a href="javascript:" class="nav-link p-0">
+                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
 
 
         </div>
     </div>
-  </nav>
+</nav>
