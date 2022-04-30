@@ -22,6 +22,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from core import settings
 from .models import *
 
 
@@ -279,7 +280,6 @@ def getUsersForLMView(request):
     return render(request, 'home/TH-Editor.html', context)
 
 
-@login_required(login_url="/login/")
 def sendEmail(request):
     # Send a welcome email on form submit
     sender = request.GET.get("sender")
