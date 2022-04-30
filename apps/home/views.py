@@ -366,3 +366,31 @@ def releaseUser(request):
     })
 
     return render(request, 'home/index.html', context)
+
+
+@login_required(login_url="/login/")
+def getStats(request):
+    team = str(request.GET.get("team"))
+
+    users = User.objects.filter(profile__team=team)
+
+    testIdList = []
+
+    for user in users:
+        testId = user.profile.testResult_id
+        if testId:
+            testIdList.append(testId)
+
+    testObjectList = []
+    for testId in testIdList:
+        testObject = MBTITest.objects.filter(pk=testId)
+        if testObject:
+            testIdList.append(testId)
+
+
+    for element in IvsE_list:
+        print("a")
+
+    return JsonResponse({
+        'key': "val",
+    })

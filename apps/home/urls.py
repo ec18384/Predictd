@@ -45,5 +45,8 @@ urlpatterns = [
     # Release user
     path('releaseUser', views.releaseUser),
 
+    # Stats endpoint
+    path('getStats', views.getStats),
+
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'), ]

@@ -65,7 +65,7 @@
                                             </g>
                                         </svg>
                                         <span id="generateButton" class="ms-1" data-bs-toggle="modal"
-                                              data-bs-target="#newUserModal">View Team MBTI Statistics</span>
+                                              data-bs-target="#statsModal">View Team MBTI Statistics</span>
 
                                     </a>
                                 </li>
@@ -133,8 +133,7 @@
                                 </button>
                             </td>
                             <td class="align-middle text-center">
-                                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#workStyleModal">View mbti resources
+                                <button type="button" class="btn btn-outline-secondary btn-sm"> <a href="/profile.html?type={{ siteUser.profile.testResult.type }}" style="text-decoration: none">View mbti resources</a>
                                 </button>
                             </td>
                             {% if request.user.profile.role == "Team Head" %}
@@ -246,31 +245,69 @@
         </div>
     </div>
 
-    {#  Work Styles Modal  #}
-    <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default"
-         aria-hidden="true">
-        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Work Styles</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                        live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                        a large language ocean.</p>
-                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                        is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-primary">Save changes</button>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
+{#  Work Styles Modal  #}
+<div class="col-md-4">
+    <div class="modal fade" id="workStyleModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+      <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-default">{{ mbtiTypeData.typeName }} Work Styles<p>(CrstalKnows.com, 2022)</p></h6>
+            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h6>Communicating with an {{ mbtiTypeData.typeName }} personality type</h6>
+            <p>{{ mbtiTypeData.communication | safe }}</p>
+
+            <h6>Meeting with an {{ mbtiTypeData.typeName }} personality type</h6>
+            <p>{{ mbtiTypeData.meeting | safe }}</p>
+
+            <h6>Emailing  an {{ mbtiTypeData.typeName }} personality type</h6>
+            <p>{{ mbtiTypeData.emailing | safe }}</p>
+
+            <h6>Giving feedback to an {{ mbtiTypeData.typeName }} personality type</h6>
+            <p>{{ mbtiTypeData.feedback | safe }}</p>
+
+            <h6>Resolving conflict with an {{ mbtiTypeData.typeName }} personality type</h6>
+            <p>{{ mbtiTypeData.conflict | safe }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+{#  Stats Modal  #}
+<div class="col-md-4">
+    <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+      <div class="modal-dialog modal- modal-dialog-centered modal-" role="document"  style="max-width: 800px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-default">Team Statistics</h6>
+            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+                    <div class="modal-body">
+                    <div class="card mb-3">
+                    <div class="card-body p-5">
+                    <div class="chart">
+                    <canvas id="radar-chart" class="chart-canvas" height="100px"></canvas>
+                    </div>
+                    </div>
+                    </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn bg-gradient-primary">Save changes</button>
+            <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <script>
         function releaseUser(userId) {
@@ -291,6 +328,8 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
+
+    <script src="../../assets/js/plugins/chartjs.min.js"></script>
 
     <script>
         // SUBMIT - Called when submit button is pressed. (Uses POST to add a new student)
