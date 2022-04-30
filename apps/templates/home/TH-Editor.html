@@ -38,10 +38,11 @@
                         <div class="nav-wrapper position-relative end-0">
                             <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                                 <li class="nav-item">
-                                        <button class="btn btn-icon btn-3 btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#statsModal" onclick="showStats()">
-                                            <span class="btn-inner--icon"><i class="ni ni-chart-bar-32"></i></span>
-                                          <span class="btn-inner--text">View Team MBTI Statistics</span>
-                                        </button>
+                                    <button class="btn btn-icon btn-3 btn-primary" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#statsModal" onclick="showStats()">
+                                        <span class="btn-inner--icon"><i class="ni ni-chart-bar-32"></i></span>
+                                        <span class="btn-inner--text">View Team MBTI Statistics</span>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -279,13 +280,15 @@
                         <div class="card mb-3">
                             <div class="card-body p-5">
                                 <div>
-                                  <canvas id="myChart"></canvas>
+                                    <canvas id="myChart"></canvas>
                                 </div>
                                 <br>
                                 <br>
                                 <p id="statsText">Text body</p>
                                 <br>
-                                <p id="statsTextFooter">Courtesy of:</p><a href="https://hbr.org/2015/03/introverts-extroverts-and-the-complexities-of-team-dynamics#:~:text=Extroverts%20bring%20the%20vision%2C%20assertiveness,leaders%20who%20have%20the%20advantage">Harvard Business Review</a>
+                                <p id="statsTextFooter">Courtesy of:</p><a
+                                    href="https://hbr.org/2015/03/introverts-extroverts-and-the-complexities-of-team-dynamics#:~:text=Extroverts%20bring%20the%20vision%2C%20assertiveness,leaders%20who%20have%20the%20advantage">Harvard
+                                Business Review</a>
                             </div>
                         </div>
                     </div>
@@ -319,29 +322,29 @@
 
         $('#statsText').text(jsonObject["message"]);
 
-      const data = {
-        labels: ['Introverts', 'Extraverts'],
-        datasets: [{
-          label: 'Number of Introverts vs Extraverts in Team',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [iCount, eCount],
-        }]
-      };
+        const data = {
+            labels: ['Introverts', 'Extraverts'],
+            datasets: [{
+                label: 'Number of Introverts vs Extraverts in Team',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [iCount, eCount],
+            }]
+        };
 
-      const config = {
-        type: 'bar',
-        data: data,
-        options: {},
-        ticks: {stepSize: 1}
-      };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {},
+            ticks: {stepSize: 1}
+        };
     </script>
 
     <script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
     </script>
 
 
