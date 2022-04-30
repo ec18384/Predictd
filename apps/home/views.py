@@ -96,7 +96,7 @@ def get_LinkedinSummary(request):
             # direct the webdriver to where the browser file is:
             # your secret credentials:
             email = "andricozach@gmail.com"
-            password = ",6CWV7TKk(Rr3mJ"
+            password = settings.LINKEDIN_PASSWORD
             # Go to linkedin and login
             driver.get('https://www.linkedin.com/login')
 
