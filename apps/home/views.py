@@ -50,8 +50,6 @@ def index(request):
         typeOccurrenceList = list(MBTITest.objects.all().values_list('type', flat=True))
         mostCommonType = most_frequent(typeOccurrenceList)
 
-
-
     context = {'segment': 'index',
                "totalUsers": totalUsers,
                "totalTestsRan": totalTestsRan,
@@ -397,7 +395,6 @@ def getStats(request):
         if testObject:
             testObjectList.append(testObject)
 
-
     IntrovertList = []
     ExtravertList = []
 
@@ -420,11 +417,12 @@ def getStats(request):
     footer = "Courtesy of Harvard Business Review: https://hbr.org/2015/03/introverts-extroverts-and-the-complexities-of-team-dynamics#:~:text=Extroverts%20bring%20the%20vision%2C%20assertiveness,leaders%20who%20have%20the%20advantage."
 
     return JsonResponse({
-                'introverts': str(len(IntrovertList)),
-                'extraverts': str(len(ExtravertList)),
-                'message': message,
-                'footer': footer
-            })
+        'introverts': str(len(IntrovertList)),
+        'extraverts': str(len(ExtravertList)),
+        'message': message,
+        'footer': footer
+    })
+
 
 @login_required(login_url="/login/")
 def getWorkStyles(request):
