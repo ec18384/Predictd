@@ -38,9 +38,19 @@ def index(request):
     totalTestsRan = MBTITest.objects.count()
     averageTestAccuracy = MBTITest.objects.aggregate(Avg("probability"))
     averageTestAccuracy = averageTestAccuracy["probability__avg"]
-    averageTestAccuracy = "{:.2f}".format(averageTestAccuracy)
-    typeOccurrenceList = list(MBTITest.objects.all().values_list('type', flat=True))
-    mostCommonType = most_frequent(typeOccurrenceList)
+
+    if averageTestAccuracy:
+        averageTestAccuracy = "{:.2f}".format(averageTestAccuracy)
+    else:
+        averageTestAccuracy = 0.00
+
+    mostCommonType = "N/A"
+
+    if list(MBTITest.objects.all().values_list('type', flat=True)):
+        typeOccurrenceList = list(MBTITest.objects.all().values_list('type', flat=True))
+        mostCommonType = most_frequent(typeOccurrenceList)
+
+
 
     context = {'segment': 'index',
                "totalUsers": totalUsers,
@@ -370,7 +380,7 @@ def releaseUser(request):
 
 @login_required(login_url="/login/")
 def getStats(request):
-    team = str(request.GET.get("team"))
+    team = request.user.profile.team
 
     users = User.objects.filter(profile__team=team)
 
@@ -385,12 +395,53 @@ def getStats(request):
     for testId in testIdList:
         testObject = MBTITest.objects.filter(pk=testId)
         if testObject:
-            testIdList.append(testId)
+            testObjectList.append(testObject)
 
 
-    for element in IvsE_list:
-        print("a")
+    IntrovertList = []
+    ExtravertList = []
+
+    for test in testObjectList:
+        for qs in test:
+            if qs.IvsE == "E":
+                ExtravertList.append(qs.IvsE)
+            elif qs.IvsE == "I":
+                IntrovertList.append(qs.IvsE)
+
+    message = ""
+
+    if len(IntrovertList) > len(ExtravertList):
+        message = "It looks like this team skews towards strong Introversion. Team leaders who are introverts typically dislike noise, interruptions, and big group settings. They instead tend to prefer quiet solitude, time to think before speaking (or acting), and building relationships and trust one-on-one. Introverts recharge with reflection, deep dives into their inner landscape to research ideas, and focus deeply on work."
+    elif len(ExtravertList) > len(IntrovertList):
+        message = "It looks like this team skews towards strong Extraversion. Team leaders who are extroverted can be highly effective leaders when the members of their team are dutiful followers looking for guidance from above. Extroverts bring the vision, assertiveness, energy, and networks necessary to give them direction."
+    elif len(IntrovertList) == len(ExtravertList):
+        message = "It looks like this team is evenly split between Introverts and Extraverts. The type of clear thinking that these structured memos require also serves the purpose of leveling the playing field for team members who differ in their level of introversion and extroversion. The imposition of writing as a medium turns self-discipline and personal reflection into effective meetings and participative decision making. After devoting time to reading, the group can then focus on engaging in a valuable discourse: reaching shared understandings, digging deeper into data and insights, and perhaps most importantly, having a meaningful debate. The process gives introverted team members the time they need to formulate their thoughts and, for some, build up the courage to share them with the rest of the team. It also encourages the extroverted to listen, reflect, and become more open to the perspectives of their more silent peers. Thinking more carefully about how to structure meetings can be very helpful to make sure they produce good outcomes. And it can also assure management can get the best out of the introverted members, in addition to the more extroverted ones."
+
+    footer = "Courtesy of Harvard Business Review: https://hbr.org/2015/03/introverts-extroverts-and-the-complexities-of-team-dynamics#:~:text=Extroverts%20bring%20the%20vision%2C%20assertiveness,leaders%20who%20have%20the%20advantage."
 
     return JsonResponse({
-        'key': "val",
+                'introverts': str(len(IntrovertList)),
+                'extraverts': str(len(ExtravertList)),
+                'message': message,
+                'footer': footer
+            })
+
+@login_required(login_url="/login/")
+def getWorkStyles(request):
+    type = str(request.GET.get("type"))
+
+    model = mbtiModel.objects.filter(typeName=type).get()
+
+    communication = model.communication
+    meeting = model.meeting
+    emailing = model.emailing
+    feedback = model.feedback
+    conflict = model.conflict
+
+    return JsonResponse({
+        "communication": communication,
+        "meeting": meeting,
+        "emailing": emailing,
+        "feedback": feedback,
+        "conflict": conflict,
     })

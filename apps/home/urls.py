@@ -48,5 +48,8 @@ urlpatterns = [
     # Stats endpoint
     path('getStats', views.getStats),
 
+    # Work styles endpoint
+    path('getWorkStyles', views.getWorkStyles),
+
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'), ]
