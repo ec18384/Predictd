@@ -4,6 +4,8 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+from core import settings
+
 
 class FunctionalTests(StaticLiveServerTestCase):
     # Use a predefined fixture from a test database
@@ -14,8 +16,8 @@ class FunctionalTests(StaticLiveServerTestCase):
 
         # direct the webdriver to where the browser file is:
         # your secret credentials:
-        email = "andricozach@gmail.com"
-        password = "***REMOVED***"
+        email = settings.LINKEDIN_EMAIL
+        password = settings.LINKEDIN_PASSWORD
         # Go to linkedin and login
         driver.get('https://www.linkedin.com/login')
         # time.sleep(.5)
