@@ -7,14 +7,18 @@
 
 {% block content %}
 
-    {#<script>#}
-    {#window.onload = function() {#}
-    {#    document.getElementById('step2').hidden = true;#}
-    {#    document.getElementById('resultOutput').hidden = true;#}
-    {#</script>#}
+    <script>
+        window.onload = function () {
+            document.getElementById('step2').hidden = true
+            document.getElementById('step3').hidden = true
+            document.getElementById('step4').hidden = true
+        }
+    </script>
 
     <script xmlns="http://www.w3.org/1999/html">
         function stepOneButtonPress() {
+            document.getElementById('step2').hidden = false
+
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", "/getSummary?profileAlias=" + document.getElementById("profileAlias").value, false); // false for synchronous request
             xmlHttp.send(null);
@@ -31,12 +35,15 @@
             document.getElementById("profilePicture").src = profilePicUrl;
             document.getElementById("profilePicture").style.borderRadius = "50%";
 
-            document.getElementById("topOfStep1").scrollIntoView();
+
+            document.getElementById("step2").scrollIntoView();
         }
     </script>
 
     <script>
         function stepTwoButtonPress() {
+            document.getElementById('step3').hidden = false
+            document.getElementById('step4').hidden = false
 
             {# Read checkbox value #}
 
@@ -65,7 +72,8 @@
             document.getElementById("JvsP").textContent = jsonObject["JvsP"]
             document.getElementById("probability").textContent = jsonObject["probability"] + " %"
 
-            document.getElementById("target").scrollIntoView();
+            document.getElementById("resultOutput").scrollIntoView();
+
         }
     </script>
 
@@ -92,7 +100,7 @@
         </div>
     </div>
 
-    <div class="row" id="topOfStep1" style="padding-bottom: 60px;">
+    <div class="row" id="step1" style="padding-bottom: 60px;">
         <div class="row-cols-2">
             <div class="card">
                 <div class="card-body p-3">
@@ -137,7 +145,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="step2">
         <div class="row-cols-2">
             <div class="card">
                 <div class="overflow-hidden position-relative border-radius-xl bg-cover h-100"
@@ -161,7 +169,7 @@
         </div>
     </div>
     <div id="resultOutput">
-        <div class="row-cols-2" style="padding-top: 60px; padding-bottom: 60px;">
+        <div class="row-cols-2" style="padding-top: 60px; padding-bottom: 60px;" id="step3">
             <div class="card">
                 <div class="card-body p-3">
                     <div class="bg-gradient-dark border-radius-lg">
@@ -340,7 +348,7 @@
         </div>
     </div>
 
-    <div class="row-cols-2">
+    <div class="row-cols-2" id="step4">
         <div class="card">
             <div class="card-body p-3">
                 <h6>Breakdown of Types in the Population</h6>
@@ -350,7 +358,6 @@
             </div>
         </div>
         <canvas id="chart-bars" class="chart-canvas"></canvas>
-    </div>
     </div>
 
     {% include "includes/footer.html" %}
