@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home',  # Enable the inner home (home)
     'django_social_share',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
