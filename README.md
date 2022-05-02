@@ -3,10 +3,15 @@
 Hello! Thank you for visiting the Predictd project.
 I developed this project as part of my undergraduate final year project at Queen Mary University of London.
 
-Predictd is a web tool that allows you to use machine learning to predicts a users MBTI type, based on their LinkedIn profile. It allows allows functionality to manage the data that would be appropriate in the context of the workplace.
+Predictd is a web tool that allows you to use machine learning to predict a user's MBTI type, based on their LinkedIn profile. It allows functionality to manage the data that would be appropriate in the context of the workplace.
 
 
 # Installation Instructions
+	Prerequisites:
+	You must have Python 3.9 installed.
+	You must have a LinkedIn and Gmail account.
+	You must have a valid Chromedriver installed under 'apps/home/chromedriver' (the provided version is for Mac only)
+		(Get Chromedriver at §https://chromedriver.chromium.org/downloads)
 
  1. Clone this [project](https://github.com/andricozach/Predictd.git) using your favourite IDE (PyCharm recommend) using VCS
  2. Install all of the libraries listed under **requirements.txt** [Go to file](https://github.com/andricozach/Predictd/find/master)
