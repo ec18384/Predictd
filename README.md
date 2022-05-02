@@ -1,3 +1,6 @@
+# Instructions to run this project locally:
+TBA
+
 # Web App References:
 
 A Bootstrap template was used to create this project. However, it was heavily modified to be fit for purpose for the requirements of this project. The original template can be found below.
