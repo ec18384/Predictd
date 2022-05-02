@@ -10,9 +10,10 @@ Predictd is a web tool that allows you to use machine learning to predict a user
 	Prerequisites:
 	You must have Python 3.9 installed.
 	You must have a LinkedIn and Gmail account.
-	You must have a valid Chromedriver installed under 'apps/home/chromedriver' (the provided version is for Mac only)
+	You must have a valid Chromedriver install under 'apps/home/chromedriver' (the provided version is for Mac only)
 		(Get Chromedriver at §https://chromedriver.chromium.org/downloads)
 	You must be using Google Chrome.
+	Your Chromedriver and Google Chrome versions should be compatible with each other.
 
  1. Clone this [project](https://github.com/andricozach/Predictd.git) using your favourite IDE (PyCharm recommend) using VCS
  2. Install all of the libraries listed under **requirements.txt** [Go to file](https://github.com/andricozach/Predictd/find/master)
@@ -25,6 +26,8 @@ Predictd is a web tool that allows you to use machine learning to predict a user
  9. [Follow this guide to enable less secure apps in Gmail](https://support.google.com/accounts/answer/6010255?hl=en#zippy=%2Cif-less-secure-app-access-is-on-for-your-account)
  10. Save changes
  11. Predictd is now fully configured and working!
+
+Note: Installations across different machine configurations may vary slightly and be fiddly for no apparent reason. Please use your discretion when following the installation instructions.
 
 # References and Acknowledgements
 
